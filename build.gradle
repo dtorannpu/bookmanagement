@@ -1,42 +1,111 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id 'org.springframework.boot' version '3.2.4'
-	id 'io.spring.dependency-management' version '1.1.4'
-	id 'org.jetbrains.kotlin.jvm' version '1.9.23'
-	id 'org.jetbrains.kotlin.plugin.spring' version '1.9.23'
-	id 'org.jlleitschuh.gradle.ktlint' version '12.1.0'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.23'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.9.23'
+    id 'org.jlleitschuh.gradle.ktlint' version '12.1.0'
+    id 'org.jooq.jooq-codegen-gradle' version '3.19.6'
+    id 'co.uzzu.dotenv.gradle' version '4.0.0'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '21'
+    sourceCompatibility = '21'
 }
 
 repositories {
-	mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-jooq'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.jetbrains.kotlin:kotlin-reflect'
-	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-	runtimeOnly 'org.postgresql:postgresql'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    jooqCodegen 'org.postgresql:postgresql'
+    jooqCodegen 'org.jooq:jooq'
+    jooqCodegen 'org.jooq:jooq-meta'
+    jooqCodegen 'org.jooq:jooq-codegen'
+    jooqCodegen 'co.uzzu.dotenv:gradle:4.0.0'
 }
 
+apply plugin: "co.uzzu.dotenv.gradle"
+
 tasks.withType(KotlinCompile) {
-	kotlinOptions {
-		freeCompilerArgs += '-Xjsr305=strict'
-		jvmTarget = '21'
-	}
+    kotlinOptions {
+        freeCompilerArgs += '-Xjsr305=strict'
+        jvmTarget = '21'
+    }
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
+}
+
+jooq {
+    configuration {
+
+        // Configure the database connection here
+        jdbc {
+            driver = "org.postgresql.Driver"
+            url = "jdbc:postgresql://localhost:${env.POSTGRES_PORT.value}/${env.POSTGRES_DB.value}"
+            user = env.POSTGRES_USER.value
+            password = env.POSTGRES_PASSWORD.value
+        }
+        generator {
+            database {
+                name = "org.jooq.meta.postgres.PostgresDatabase"
+
+                // All elements that are generated from your schema (A Java regular expression.
+                // Use the pipe to separate several expressions) Watch out for
+                // case-sensitivity. Depending on your database, this might be
+                // important!
+                //
+                // You can create case-insensitive regular expressions using this syntax: (?i:expr)
+                //
+                // Whitespace is ignored and comments are possible.
+                includes = ".*"
+
+                // All elements that are excluded from your schema (A Java regular expression.
+                // Use the pipe to separate several expressions). Excludes match before
+                // includes, i.e. excludes have a higher priority
+                excludes = ""
+
+                // The schema that is used locally as a source for meta information.
+                // This could be your development schema or the production schema, etc
+                // This cannot be combined with the schemata element.
+                //
+                // If left empty, jOOQ will generate all available schemata. See the
+                // manual's next section to learn how to generate several schemata
+                inputSchema = "public"
+            }
+
+            // Generation flags: See advanced configuration properties
+            generate {}
+            target {
+
+                // The destination package of your generated classes (within the
+                // destination directory)
+                //
+                // jOOQ may append the schema name to this package if generating multiple schemas,
+                // e.g. org.jooq.your.packagename.schema1
+                // org.jooq.your.packagename.schema2
+                packageName = "com.example.bookmanagement.db"
+
+                // The destination directory of your generated classes
+                directory = "src/main/kotlin"
+            }
+        }
+    }
 }
