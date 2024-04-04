@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -15,6 +16,10 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '21'
+}
+
+kotlin.sourceSets.main {
+    kotlin.srcDir(layout.buildDirectory.dir('generated-sources/jooq'))
 }
 
 repositories {
@@ -104,10 +109,10 @@ jooq {
                 // jOOQ may append the schema name to this package if generating multiple schemas,
                 // e.g. org.jooq.your.packagename.schema1
                 // org.jooq.your.packagename.schema2
-                packageName = "com.example.bookmanagement.db"
+                packageName = "com.example.bookmanagement.db.jooq.gen"
 
                 // The destination directory of your generated classes
-                directory = "src/main/kotlin"
+                //directory = "src/main/kotlin"
             }
         }
     }
