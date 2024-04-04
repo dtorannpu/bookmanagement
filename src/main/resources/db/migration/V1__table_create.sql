@@ -1,16 +1,16 @@
 -- 著者
 create table author (
-                        id serial not null
+      id serial not null
     , name character varying(100) not null
     , constraint author_PKC primary key (id)
 ) ;
 
 -- 書籍
 create table book (
-                      id serial not null
+      id serial not null
     , isbn character varying(13)
     , author_id integer not null
-    , title character varying(100)
+    , title character varying(100) not null
     , constraint book_PKC primary key (id)
 ) ;
 
