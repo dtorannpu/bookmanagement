@@ -23,6 +23,22 @@ paths:
       operationId: createAuthor
       tags:
         - author
+      summary: 著者登録
+    put:
+      summary: 著者更新
+      operationId: updateAuthor
+      responses:
+        '200':
+          description: OK
+      description: 著者更新
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAuthor'
+      tags:
+        - author
 components:
   schemas:
     CreateAuthor:
@@ -41,6 +57,30 @@ components:
           example: '2020-01-01'
           format: date
       required:
+        - name
+    UpdateAuthor:
+      title: UpdateAuthor
+      x-stoplight:
+        id: ovpwu12xvsbxi
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: ID
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 夏目　漱石
+          description: 著者名
+        birthday:
+          type: string
+          format: date
+          example: '2000-01-01'
+          description: 誕生日
+      required:
+        - id
         - name
 tags:
   - name: author
