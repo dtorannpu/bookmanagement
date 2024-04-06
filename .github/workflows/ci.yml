@@ -38,7 +38,7 @@ jobs:
       run: ./gradlew jooqCodegen
 
     - name: execute OpenAPI code generator
-      run: ./gradlew jooqCodegen
+      run: ./gradlew openApiGenerate
 
     - name: Check
       run: ./gradlew check
