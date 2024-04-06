@@ -2,6 +2,7 @@
 create table author (
       id serial not null
     , name character varying(100) not null
+    , birthday date
     , constraint author_PKC primary key (id)
 ) ;
 
@@ -20,6 +21,7 @@ alter table book add constraint book_IX1
 comment on table author is '著者';
 comment on column author.id is 'id';
 comment on column author.name is '著者名';
+comment on column author.birthday is '誕生日';
 
 comment on table book is '書籍';
 comment on column book.id is 'ID';

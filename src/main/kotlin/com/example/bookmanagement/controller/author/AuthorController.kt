@@ -19,6 +19,6 @@ class AuthorController(val authorService: AuthorService) {
     fun create(
         @RequestBody request: CreateRequest,
     ) {
-        authorService.create(request.name)
+        authorService.create(request.name, request.birthday)
     }
 }
