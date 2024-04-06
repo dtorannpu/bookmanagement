@@ -16,6 +16,7 @@ plugins {
     id "org.jooq.jooq-codegen-gradle" version "3.19.6"
     id "co.uzzu.dotenv.gradle" version "4.0.0"
     id "org.flywaydb.flyway" version "10.11.0"
+    id "org.openapi.generator" version "7.2.0"
 }
 
 group = "com.example"
@@ -27,6 +28,7 @@ java {
 
 kotlin.sourceSets.main {
     kotlin.srcDir(layout.buildDirectory.dir("generated-sources/jooq"))
+    kotlin.srcDir(layout.buildDirectory.dir("generated-sources/api/src/main/kotlin"))
 }
 
 repositories {
@@ -43,6 +45,8 @@ dependencies {
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
     implementation "org.flywaydb:flyway-core"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
     developmentOnly "org.springframework.boot:spring-boot-docker-compose"
     runtimeOnly "org.postgresql:postgresql"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -165,4 +169,17 @@ ktlint {
         //exclude("**/generated-sources/**")
         include("**/kotlin/**")
     }
+}
+
+openApiGenerate {
+    generatorName.set("kotlin-spring")
+    inputSpec.set("$rootDir/bookmanagement.yaml")
+    outputDir.set(layout.buildDirectory.dir("generated-sources/api").get().toString())
+    apiPackage.set("com.example.bookmanagement.api")
+    invokerPackage.set("com.example.bookmanagement.api.invoker")
+    modelPackage.set("com.example.bookmanagement.api.model")
+    configOptions.set([
+        dateLibrary: "java8" ,
+        useSpringBoot3: "true"
+    ])
 }

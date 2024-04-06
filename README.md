@@ -9,15 +9,23 @@ docker compose up
 
 * DBマイグレーション
 ```
-gradlew flywayMigrate
+./gradlew flywayMigrate
 ```
 
 * jOOQコード生成
 ```
-gradlew jooqCodegen
+./gradlew jooqCodegen
+```
+
+* OpenAPIコード生成
+```
+./gradlew openApiGenerate
 ```
 
 * Spring Boot起動
 ```
-gradlew bootRun
+./gradlew bootRun
 ```
+
+## OpenAPIページ
+http://localhost:8080/swagger-ui.html
