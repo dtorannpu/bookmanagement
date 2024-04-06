@@ -156,3 +156,13 @@ flyway {
     user = env.POSTGRES_USER.value
     password = env.POSTGRES_PASSWORD.value
 }
+
+ktlint {
+    filter {
+        exclude { element ->
+            element.file.path.contains("generated")
+        }
+        //exclude("**/generated-sources/**")
+        include("**/kotlin/**")
+    }
+}
