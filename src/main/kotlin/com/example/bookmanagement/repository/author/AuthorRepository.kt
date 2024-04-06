@@ -7,12 +7,24 @@ import java.time.LocalDate
  */
 interface AuthorRepository {
     /**
-     * 著者作成
+     * 作成
      *
-     * @param name: 著者
-     * @param birthday: 誕生日
+     * @param name 著者名
+     * @param birthday 誕生日
      */
     fun create(
+        name: String,
+        birthday: LocalDate?,
+    )
+
+    /**
+     * 更新
+     *
+     * @param name　著者名
+     * @param birthday 誕生日
+     */
+    fun update(
+        id: Int,
         name: String,
         birthday: LocalDate?,
     )

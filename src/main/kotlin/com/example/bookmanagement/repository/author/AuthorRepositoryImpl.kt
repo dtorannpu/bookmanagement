@@ -19,4 +19,16 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
         author.birthday = birthday
         author.store()
     }
+
+    override fun update(
+        id: Int,
+        name: String,
+        birthday: LocalDate?,
+    ) {
+        create.update(AUTHOR)
+            .set(AUTHOR.NAME, name)
+            .set(AUTHOR.BIRTHDAY, birthday)
+            .where(AUTHOR.ID.eq(id))
+            .execute()
+    }
 }

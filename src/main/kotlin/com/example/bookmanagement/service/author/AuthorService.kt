@@ -10,9 +10,22 @@ interface AuthorService {
      * 作成
      *
      * @param name 著者名
-     * @param birthday: 誕生日
+     * @param birthday 誕生日
      */
     fun create(
+        name: String,
+        birthday: LocalDate?,
+    )
+
+    /**
+     * 更新
+     *
+     * @param id ID
+     * @param name 著者名
+     * @param birthday 誕生日
+     */
+    fun update(
+        id: Int,
         name: String,
         birthday: LocalDate?,
     )

@@ -17,4 +17,13 @@ class AuthorServiceImpl(private val authorRepository: AuthorRepository) : Author
     ) {
         authorRepository.create(name, birthday)
     }
+
+    @Transactional
+    override fun update(
+        id: Int,
+        name: String,
+        birthday: LocalDate?,
+    ) {
+        authorRepository.update(id, name, birthday)
+    }
 }
