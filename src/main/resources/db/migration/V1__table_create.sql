@@ -15,6 +15,9 @@ create table book (
     , constraint book_PKC primary key (id)
 ) ;
 
+alter table book
+    add constraint book_FK1 foreign key (author_id) references author(id);
+
 comment on table author is '著者';
 comment on column author.id is 'id';
 comment on column author.name is '著者名';
