@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  * 著者コントローラー
  */
 @RestController
-class AuthorApiController(val authorService: AuthorService) : AuthorsApi {
+class AuthorApiController(private val authorService: AuthorService) : AuthorsApi {
     override fun createAuthor(createAuthor: CreateAuthor): ResponseEntity<Unit> {
         authorService.create(createAuthor.name, createAuthor.birthday)
         return ResponseEntity(HttpStatus.OK)
