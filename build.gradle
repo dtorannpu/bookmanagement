@@ -180,6 +180,7 @@ openApiGenerate {
     modelPackage.set("com.example.bookmanagement.api.model")
     configOptions.set([
         dateLibrary: "java8" ,
-        useSpringBoot3: "true"
+        useSpringBoot3: "true",
+        interfaceOnly: "true",
     ])
 }

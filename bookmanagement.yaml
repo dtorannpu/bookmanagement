@@ -11,11 +11,11 @@ paths:
   /authors:
     post:
       description: 著者登録
-      parameters: []
       responses:
         '200':
           description: OK
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -28,20 +28,22 @@ components:
     CreateAuthor:
       type: object
       description: 著者作成
-      required:
-        - name
       properties:
         name:
           type: string
           description: 著者名
           example: 夏目　漱石
+          minLength: 1
+          maxLength: 100
         birthday:
           type: string
           description: 誕生日
           example: '2020-01-01'
           format: date
+      required:
+        - name
 tags:
   - name: author
-    description: '著者'
+    description: 著者
   - name: book
-    description: '書籍'
+    description: 書籍
