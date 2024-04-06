@@ -1,6 +1,8 @@
 package com.example.bookmanagement.repository.author
 
+import com.example.bookmanagement.db.jooq.gen.tables.records.JAuthorRecord
 import com.example.bookmanagement.db.jooq.gen.tables.references.AUTHOR
+import com.example.bookmanagement.model.Author
 import org.jooq.DSLContext
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
@@ -31,4 +33,10 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
             .where(AUTHOR.ID.eq(id))
             .execute()
     }
+
+    override fun findById(id: Int): Author? {
+        return create.fetchOne(AUTHOR, AUTHOR.ID.eq(id))?.let(::toAuthor)
+    }
+
+    private fun toAuthor(row: JAuthorRecord) = Author(id = row.id!!, name = row.name, birthday = row.birthday)
 }

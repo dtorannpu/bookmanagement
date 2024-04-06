@@ -70,6 +70,29 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateBook'
+  '/authors/{id}':
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+        description: ID
+    get:
+      summary: 著者をIDで取得
+      tags:
+        - author
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '404':
+          description: Not Found
+      operationId: getAuthorById
+      description: 著者をIDで取得
 components:
   schemas:
     CreateAuthor:
@@ -163,6 +186,24 @@ components:
         - id
         - authorId
         - title
+    Author:
+      title: Author
+      x-stoplight:
+        id: g8akxct1grn56
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID
+          example: 1
+        name:
+          type: string
+          description: 著者名
+          example: 夏目　漱石
+        birthday:
+          type: string
+          description: 誕生日
+          example: '2000-01-01'
 tags:
   - name: author
     description: 著者
