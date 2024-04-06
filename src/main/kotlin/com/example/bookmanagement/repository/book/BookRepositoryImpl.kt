@@ -20,4 +20,18 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         book.title = title
         book.store()
     }
+
+    override fun update(
+        id: Int,
+        isbn: String?,
+        authorId: Int,
+        title: String,
+    ) {
+        create.update(BOOK)
+            .set(BOOK.ISBN, isbn)
+            .set(BOOK.AUTHOR_ID, authorId)
+            .set(BOOK.TITLE, title)
+            .where(BOOK.ID.eq(id))
+            .execute()
+    }
 }

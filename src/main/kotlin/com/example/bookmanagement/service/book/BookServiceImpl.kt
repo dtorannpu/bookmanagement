@@ -17,4 +17,14 @@ class BookServiceImpl(private val bookRepository: BookRepository) : BookService 
     ) {
         bookRepository.create(isbn, authorId, title)
     }
+
+    @Transactional
+    override fun update(
+        id: Int,
+        isbn: String?,
+        authorId: Int,
+        title: String,
+    ) {
+        bookRepository.update(id, isbn, authorId, title)
+    }
 }

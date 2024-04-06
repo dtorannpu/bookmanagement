@@ -55,6 +55,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateBook'
+    patch:
+      summary: 書籍更新
+      operationId: updateBook
+      responses:
+        '200':
+          description: OK
+      description: 書籍更新
+      tags:
+        - book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBook'
 components:
   schemas:
     CreateAuthor:
@@ -119,6 +134,33 @@ components:
           maxLength: 100
           example: こころ
       required:
+        - authorId
+        - title
+    UpdateBook:
+      title: UpdateBook
+      x-stoplight:
+        id: 2i79z2qla5if5
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID
+        isbn:
+          type: string
+          description: ISBN
+          maxLength: 17
+          example: 978-4101010137
+        authorId:
+          type: integer
+          example: 1
+        title:
+          type: string
+          description: タイトル
+          minLength: 1
+          maxLength: 100
+          example: こころ
+      required:
+        - id
         - authorId
         - title
 tags:
