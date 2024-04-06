@@ -37,6 +37,9 @@ jobs:
     - name: execute jOOQ code generator
       run: ./gradlew jooqCodegen
 
+    - name: execute OpenAPI code generator
+      run: ./gradlew openApiGenerate
+
     - name: Check
       run: ./gradlew check
 
