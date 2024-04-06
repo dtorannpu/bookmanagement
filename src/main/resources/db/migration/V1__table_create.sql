@@ -9,14 +9,14 @@ create table author (
 -- 書籍
 create table book (
       id serial not null
-    , isbn character varying(13)
+    , isbn character varying(17)
     , author_id integer not null
     , title character varying(100) not null
     , constraint book_PKC primary key (id)
 ) ;
 
-alter table book add constraint book_IX1
-    unique (isbn) ;
+alter table book
+    add constraint book_FK1 foreign key (author_id) references author(id);
 
 comment on table author is '著者';
 comment on column author.id is 'id';
