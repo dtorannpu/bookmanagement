@@ -77,6 +77,7 @@ jooq {
             password = env.POSTGRES_PASSWORD.value
         }
         generator {
+            name = "org.jooq.codegen.KotlinGenerator"
             database {
                 name = "org.jooq.meta.postgres.PostgresDatabase"
 
@@ -107,7 +108,32 @@ jooq {
             }
 
             // Generation flags: See advanced configuration properties
-            generate {}
+            generate {
+                // Tell the KotlinGenerator to generate properties in addition to methods for these paths. Default is true.
+                implicitJoinPathsAsKotlinProperties = true
+
+                // Workaround for Kotlin generating setX() setters instead of setIsX() in byte code for mutable properties called
+                // <code>isX</code>. Default is true.
+                kotlinSetterJvmNameAnnotationsOnIsPrefix = true
+
+                // Generate POJOs as data classes, when using the KotlinGenerator. Default is true.
+                pojosAsKotlinDataClasses = true
+
+                // Generate non-nullable types on POJO attributes, where column is not null. Default is false.
+                kotlinNotNullPojoAttributes = true
+
+                // Generate non-nullable types on Record attributes, where column is not null. Default is false.
+                kotlinNotNullRecordAttributes = true
+
+                // Generate non-nullable types on interface attributes, where column is not null. Default is false.
+                kotlinNotNullInterfaceAttributes = true
+
+                // Generate defaulted nullable POJO attributes. Default is true.
+                kotlinDefaultedNullablePojoAttributes = false
+
+                // Generate defaulted nullable Record attributes. Default is true.
+                kotlinDefaultedNullableRecordAttributes = false
+            }
             target {
 
                 // The destination package of your generated classes (within the
