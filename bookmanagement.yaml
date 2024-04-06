@@ -24,7 +24,7 @@ paths:
       tags:
         - author
       summary: 著者登録
-    put:
+    patch:
       summary: 著者更新
       operationId: updateAuthor
       responses:
