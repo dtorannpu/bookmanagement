@@ -135,7 +135,7 @@ paths:
         required: true
         description: ID
     get:
-      summary: 著者をIDで取得
+      summary: 著者に紐づく本を取得できる機能
       tags:
         - author
       responses:
@@ -148,7 +148,7 @@ paths:
         '404':
           description: Not Found
       operationId: getAuthorById
-      description: 著者をIDで取得
+      description: 著者に紐づく本を取得できる機能
 components:
   schemas:
     CreateAuthorRequest:
