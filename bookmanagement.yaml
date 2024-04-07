@@ -276,7 +276,7 @@ components:
         id:
           type: integer
           description: ID
-          example: '1'
+          example: 1
         isbn:
           type: string
           description: ISBN
