@@ -204,6 +204,33 @@ components:
           type: string
           description: 誕生日
           example: '2000-01-01'
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorBook'
+      required:
+        - id
+        - name
+        - books
+    AuthorBook:
+      title: AuthorBook
+      x-stoplight:
+        id: 2g0opobb408k1
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID
+          default: 1
+        isbn:
+          type: string
+          example: 978-4101010137
+        title:
+          type: string
+          example: こころ
+      required:
+        - id
+        - title
 tags:
   - name: author
     description: 著者
