@@ -8,6 +8,6 @@ import java.time.LocalDate
  * @param id ID
  * @param name 名前
  * @param birthday 誕生日
- * @param books 著者の本
+ * @param books 著者の書籍
  */
 data class AuthorDetail(val id: Int, val name: String, val birthday: LocalDate?, val books: List<AuthorBook>)

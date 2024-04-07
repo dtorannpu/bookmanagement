@@ -6,6 +6,6 @@ package com.example.bookmanagement.model
  * @param id ID
  * @param isbn ISBN
  * @param title タイトル
- * @param author 本の著者
+ * @param author 書籍の著者
  */
 data class Book(val id: Int, val isbn: String?, val title: String, val author: BookAuthor)
