@@ -1,5 +1,6 @@
 package com.example.bookmanagement.service.book
 
+import com.example.bookmanagement.model.Book
 import com.example.bookmanagement.repository.book.BookRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -26,5 +27,13 @@ class BookServiceImpl(private val bookRepository: BookRepository) : BookService 
         title: String,
     ) {
         bookRepository.update(id, isbn, authorId, title)
+    }
+
+    override fun search(
+        title: String?,
+        authorName: String?,
+        isbn: String?,
+    ): List<Book> {
+        return bookRepository.search(title, authorName, isbn)
     }
 }

@@ -61,14 +61,14 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
                     id = record.get(AUTHOR.ID)!!,
                     name = record.get(AUTHOR.NAME)!!,
                     birthday = record.get(AUTHOR.BIRTHDAY),
-                    books =
-                        record.value4().map { book ->
-                            AuthorBook(
-                                id = book.id,
-                                isbn = book.isbn,
-                                title = book.title,
-                            )
-                        },
+                    books = record.value4(),
+//                        record.value4().map { book ->
+//                            AuthorBook(
+//                                id = book.id,
+//                                isbn = book.isbn,
+//                                title = book.title,
+//                            )
+//                        },
                 )
             }
     }

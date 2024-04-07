@@ -70,6 +70,40 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateBook'
+    get:
+      summary: 書籍の検索
+      operationId: searchBook
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+      tags:
+        - book
+      description: 書籍の検索
+      parameters:
+        - schema:
+            type: string
+            example: こころ
+          in: query
+          name: bookTitle
+          description: 書籍タイトル
+        - schema:
+            type: string
+            example: 夏目　漱石
+          in: query
+          name: authorName
+          description: 著者名
+        - schema:
+            type: string
+            example: 978-4101010137
+          in: query
+          name: isbn
+          description: ISBN
   '/authors/{id}':
     parameters:
       - schema:
@@ -231,6 +265,55 @@ components:
       required:
         - id
         - title
+      description: ''
+    Book:
+      title: Book
+      x-stoplight:
+        id: 1k3jugezay1ke
+      type: object
+      description: 書籍
+      properties:
+        id:
+          type: integer
+          description: ID
+          example: '1'
+        isbn:
+          type: string
+          description: ISBN
+          example: 978-4101010137
+        title:
+          type: string
+          description: タイトル
+          example: こころ
+        author:
+          $ref: '#/components/schemas/BookAuthor'
+      required:
+        - id
+        - title
+        - author
+    BookAuthor:
+      title: BookAuthor
+      x-stoplight:
+        id: taweepph9g19d
+      type: object
+      description: 本の著者
+      properties:
+        authorId:
+          type: integer
+          example: 1
+          description: ID
+        name:
+          type: string
+          description: 著者名
+          example: 夏目　漱石
+        birthday:
+          type: string
+          description: 誕生日
+          example: '2000-01-01'
+          format: date
+      required:
+        - authorId
+        - name
 tags:
   - name: author
     description: 著者
