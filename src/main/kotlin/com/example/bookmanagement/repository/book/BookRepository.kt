@@ -13,13 +13,13 @@ interface BookRepository {
      * @param authorId 著者ID
      * @param title タイトル
      *
-     * @return 成功した場合ID
+     * @return ID
      */
     fun create(
         isbn: String?,
         authorId: Int,
         title: String,
-    ): Int?
+    ): Int
 
     /**
      * 更新
