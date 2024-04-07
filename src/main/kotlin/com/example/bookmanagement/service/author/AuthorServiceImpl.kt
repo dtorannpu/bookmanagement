@@ -1,5 +1,6 @@
 package com.example.bookmanagement.service.author
 
+import com.example.bookmanagement.model.AuthorDetail
 import com.example.bookmanagement.repository.author.AuthorRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -9,7 +10,8 @@ import java.time.LocalDate
  * 著者サービス実装
  */
 @Service
-class AuthorServiceImpl(private val authorRepository: AuthorRepository) : AuthorService {
+class AuthorServiceImpl(private val authorRepository: AuthorRepository) :
+    AuthorService {
     @Transactional
     override fun create(
         name: String,
@@ -25,5 +27,9 @@ class AuthorServiceImpl(private val authorRepository: AuthorRepository) : Author
         birthday: LocalDate?,
     ) {
         authorRepository.update(id, name, birthday)
+    }
+
+    override fun findById(id: Int): AuthorDetail? {
+        return authorRepository.findById(id)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bookmanagement.repository.author
 
+import com.example.bookmanagement.model.AuthorDetail
 import java.time.LocalDate
 
 /**
@@ -28,4 +29,12 @@ interface AuthorRepository {
         name: String,
         birthday: LocalDate?,
     )
+
+    /**
+     * IDで著者取得
+     *
+     * @param id ID
+     * @return 著者
+     */
+    fun findById(id: Int): AuthorDetail?
 }

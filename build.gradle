@@ -45,8 +45,8 @@ dependencies {
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
     implementation "org.flywaydb:flyway-core"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0"
     developmentOnly "org.springframework.boot:spring-boot-docker-compose"
     runtimeOnly "org.postgresql:postgresql"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -82,6 +82,9 @@ jooq {
         }
         generator {
             name = "org.jooq.codegen.KotlinGenerator"
+            strategy {
+                name = "org.jooq.codegen.example.JPrefixGeneratorStrategy"
+            }
             database {
                 name = "org.jooq.meta.postgres.PostgresDatabase"
 
@@ -137,6 +140,16 @@ jooq {
 
                 // Generate defaulted nullable Record attributes. Default is true.
                 kotlinDefaultedNullableRecordAttributes = false
+
+//                // Generate the DAO classes
+//                daos = true
+//
+//                // Annotate DAOs (and other types) with spring annotations, such as @Repository and @Autowired
+//                // for auto-wiring the Configuration instance, e.g. from Spring Boot's jOOQ starter
+//                springAnnotations = true
+//
+//                // Generate Spring-specific DAOs containing @Transactional annotations
+//                springDao = true
             }
             target {
 
