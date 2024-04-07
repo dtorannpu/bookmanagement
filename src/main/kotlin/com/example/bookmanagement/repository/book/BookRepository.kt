@@ -12,12 +12,14 @@ interface BookRepository {
      * @param isbn ISBN
      * @param authorId 著者ID
      * @param title タイトル
+     *
+     * @return 成功した場合ID
      */
     fun create(
         isbn: String?,
         authorId: Int,
         title: String,
-    )
+    ): Int?
 
     /**
      * 更新
@@ -26,13 +28,15 @@ interface BookRepository {
      * @param isbn ISBN
      * @param authorId 著者ID
      * @param title タイトル
+     *
+     * @return 更新件数
      */
     fun update(
         id: Int,
         isbn: String?,
         authorId: Int,
         title: String,
-    )
+    ): Int
 
     /**
      * 検索

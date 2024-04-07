@@ -46,6 +46,14 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBookResponse'
+              examples:
+                登録成功時:
+                  value:
+                    id: 1
       description: 書籍登録
       tags:
         - book
@@ -61,6 +69,11 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBookResponse'
+              examples: {}
       description: 書籍更新
       tags:
         - book
@@ -70,6 +83,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateBookRequest'
+            examples: {}
     get:
       summary: 書籍の検索
       operationId: searchBook
@@ -327,6 +341,33 @@ components:
       required:
         - authorId
         - name
+    CreateBookResponse:
+      title: CreateBookResponse
+      x-stoplight:
+        id: qi3wrilss487o
+      type: object
+      description: 書籍登録に成功した場合のレスポンス
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: ID
+      required:
+        - id
+    UpdateBookResponse:
+      title: UpdateBookResponse
+      x-stoplight:
+        id: 2md7c6pz5k1et
+      type: object
+      description: 書籍更新に成功した場合のレスポンス
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: ID
+      required:
+        - id
+  responses: {}
 tags:
   - name: author
     description: 著者

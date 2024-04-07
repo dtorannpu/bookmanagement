@@ -12,12 +12,14 @@ interface BookService {
      * @param isbn ISBN
      * @param authorId 著者ID
      * @param title タイトル
+     *
+     * @return 登録に成功した場合ID
      */
     fun create(
         isbn: String?,
         authorId: Int,
         title: String,
-    )
+    ): Int?
 
     /**
      * 更新
@@ -26,13 +28,15 @@ interface BookService {
      * @param isbn ISBN
      * @param authorId 著者ID
      * @param title タイトル
+     *
+     * @return 更新に成功した場合ID
      */
     fun update(
         id: Int,
         isbn: String?,
         authorId: Int,
         title: String,
-    )
+    ): Int?
 
     /**
      * 検索

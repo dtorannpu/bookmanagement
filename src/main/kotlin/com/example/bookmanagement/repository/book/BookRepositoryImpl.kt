@@ -17,12 +17,12 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         isbn: String?,
         authorId: Int,
         title: String,
-    ) {
-        val book = create.newRecord(BOOK)
-        book.isbn = isbn
-        book.authorId = authorId
-        book.title = title
-        book.store()
+    ): Int {
+        create.insertInto(BOOK, BOOK.ISBN, BOOK.AUTHOR_ID, BOOK.TITLE)
+            .values(isbn, authorId, title)
+            .execute()
+
+        return create.lastID().intValueExact()
     }
 
     override fun update(
@@ -30,8 +30,8 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         isbn: String?,
         authorId: Int,
         title: String,
-    ) {
-        create.update(BOOK)
+    ): Int {
+        return create.update(BOOK)
             .set(BOOK.ISBN, isbn)
             .set(BOOK.AUTHOR_ID, authorId)
             .set(BOOK.TITLE, title)

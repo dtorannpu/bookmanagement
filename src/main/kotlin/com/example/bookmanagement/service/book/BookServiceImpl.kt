@@ -1,6 +1,7 @@
 package com.example.bookmanagement.service.book
 
 import com.example.bookmanagement.model.Book
+import com.example.bookmanagement.repository.author.AuthorRepository
 import com.example.bookmanagement.repository.book.BookRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -9,14 +10,17 @@ import org.springframework.transaction.annotation.Transactional
  * 書籍サービス実装
  */
 @Service
-class BookServiceImpl(private val bookRepository: BookRepository) : BookService {
+class BookServiceImpl(private val bookRepository: BookRepository, private val authorRepository: AuthorRepository) : BookService {
     @Transactional
     override fun create(
         isbn: String?,
         authorId: Int,
         title: String,
-    ) {
-        bookRepository.create(isbn, authorId, title)
+    ): Int? {
+        if (authorRepository.findById(authorId) == null) {
+            return null
+        }
+        return bookRepository.create(isbn, authorId, title)
     }
 
     @Transactional
@@ -25,8 +29,14 @@ class BookServiceImpl(private val bookRepository: BookRepository) : BookService 
         isbn: String?,
         authorId: Int,
         title: String,
-    ) {
-        bookRepository.update(id, isbn, authorId, title)
+    ): Int? {
+        if (authorRepository.findById(authorId) == null) {
+            return null
+        }
+        if (bookRepository.update(id, isbn, authorId, title) == 0) {
+            return null
+        }
+        return id
     }
 
     override fun search(
