@@ -19,7 +19,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAuthor'
+              $ref: '#/components/schemas/CreateAuthorRequest'
       operationId: createAuthor
       tags:
         - author
@@ -36,7 +36,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAuthor'
+              $ref: '#/components/schemas/UpdateAuthorRequest'
       tags:
         - author
   /books:
@@ -54,7 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateBook'
+              $ref: '#/components/schemas/CreateBookRequest'
     patch:
       summary: 書籍更新
       operationId: updateBook
@@ -69,7 +69,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateBook'
+              $ref: '#/components/schemas/UpdateBookRequest'
     get:
       summary: 書籍の検索
       operationId: searchBook
@@ -129,9 +129,9 @@ paths:
       description: 著者をIDで取得
 components:
   schemas:
-    CreateAuthor:
+    CreateAuthorRequest:
       type: object
-      description: 著者作成
+      description: 著者作成リクエスト
       properties:
         name:
           type: string
@@ -146,10 +146,13 @@ components:
           format: date
       required:
         - name
-    UpdateAuthor:
-      title: UpdateAuthor
+      title: 著者作成リクエスト
       x-stoplight:
-        id: ovpwu12xvsbxi
+        id: f56e044dc35c9
+    UpdateAuthorRequest:
+      title: 著者更新リクエスト
+      x-stoplight:
+        id: a5e173dacc7a0
       type: object
       properties:
         id:
@@ -170,11 +173,13 @@ components:
       required:
         - id
         - name
-    CreateBook:
-      title: CreateBook
+      description: 著者更新リクエスト
+    CreateBookRequest:
+      title: 書籍作成リクエスト
       x-stoplight:
-        id: ou5v3o707qcq5
+        id: 28493631cd667
       type: object
+      description: 書籍作成リクエスト
       properties:
         isbn:
           type: string
@@ -184,6 +189,7 @@ components:
         authorId:
           type: integer
           example: 1
+          description: 著者ID
         title:
           type: string
           description: タイトル
@@ -193,11 +199,12 @@ components:
       required:
         - authorId
         - title
-    UpdateBook:
-      title: UpdateBook
+    UpdateBookRequest:
+      title: 書籍更新リクエスト
       x-stoplight:
-        id: 2i79z2qla5if5
+        id: 83c501596f526
       type: object
+      description: 書籍更新リクエスト
       properties:
         id:
           type: integer
@@ -210,6 +217,7 @@ components:
         authorId:
           type: integer
           example: 1
+          description: 著者ID
         title:
           type: string
           description: タイトル
@@ -221,10 +229,11 @@ components:
         - authorId
         - title
     Author:
-      title: Author
+      title: 著者
       x-stoplight:
         id: g8akxct1grn56
       type: object
+      description: 著者
       properties:
         id:
           type: integer
@@ -238,8 +247,10 @@ components:
           type: string
           description: 誕生日
           example: '2000-01-01'
+          format: date
         books:
           type: array
+          description: 著者の書籍
           items:
             $ref: '#/components/schemas/AuthorBook'
       required:
@@ -247,10 +258,11 @@ components:
         - name
         - books
     AuthorBook:
-      title: AuthorBook
+      title: 著者の書籍
       x-stoplight:
         id: 2g0opobb408k1
       type: object
+      description: 著者の書籍
       properties:
         id:
           type: integer
@@ -259,15 +271,16 @@ components:
         isbn:
           type: string
           example: 978-4101010137
+          description: ISBN
         title:
           type: string
           example: こころ
+          description: タイトル
       required:
         - id
         - title
-      description: ''
     Book:
-      title: Book
+      title: 書籍
       x-stoplight:
         id: 1k3jugezay1ke
       type: object
@@ -292,11 +305,11 @@ components:
         - title
         - author
     BookAuthor:
-      title: BookAuthor
+      title: 書籍の著者
       x-stoplight:
         id: taweepph9g19d
       type: object
-      description: 本の著者
+      description: 書籍の著者
       properties:
         authorId:
           type: integer
