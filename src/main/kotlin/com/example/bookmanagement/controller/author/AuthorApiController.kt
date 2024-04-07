@@ -31,7 +31,7 @@ class AuthorApiController(private val authorService: AuthorService) : AuthorsApi
             Author(
                 id = author.id,
                 name = author.name,
-                birthday = author.birthday?.toString(),
+                birthday = author.birthday,
                 books =
                     author.books.map {
                         AuthorBook(id = it.id, isbn = it.isbn, title = it.title)

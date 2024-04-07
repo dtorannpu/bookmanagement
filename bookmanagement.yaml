@@ -238,6 +238,7 @@ components:
           type: string
           description: 誕生日
           example: '2000-01-01'
+          format: date
         books:
           type: array
           items:
