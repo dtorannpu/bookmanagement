@@ -3,8 +3,8 @@ package com.example.bookmanagement.controller.book
 import com.example.bookmanagement.api.BooksApi
 import com.example.bookmanagement.api.model.Book
 import com.example.bookmanagement.api.model.BookAuthor
-import com.example.bookmanagement.api.model.CreateBook
-import com.example.bookmanagement.api.model.UpdateBook
+import com.example.bookmanagement.api.model.CreateBookRequest
+import com.example.bookmanagement.api.model.UpdateBookRequest
 import com.example.bookmanagement.service.book.BookService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 class BookApiController(private val bookService: BookService) : BooksApi {
-    override fun createBook(createBook: CreateBook): ResponseEntity<Unit> {
-        bookService.create(createBook.isbn, createBook.authorId, createBook.title)
+    override fun createBook(createBookRequest: CreateBookRequest): ResponseEntity<Unit> {
+        bookService.create(createBookRequest.isbn, createBookRequest.authorId, createBookRequest.title)
         return ResponseEntity(HttpStatus.OK)
     }
 
-    override fun updateBook(updateBook: UpdateBook): ResponseEntity<Unit> {
-        bookService.update(updateBook.id, updateBook.isbn, updateBook.authorId, updateBook.title)
+    override fun updateBook(updateBookRequest: UpdateBookRequest): ResponseEntity<Unit> {
+        bookService.update(updateBookRequest.id, updateBookRequest.isbn, updateBookRequest.authorId, updateBookRequest.title)
         return ResponseEntity(HttpStatus.OK)
     }
 

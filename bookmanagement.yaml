@@ -19,7 +19,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAuthor'
+              $ref: '#/components/schemas/CreateAuthorRequest'
       operationId: createAuthor
       tags:
         - author
@@ -36,7 +36,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAuthor'
+              $ref: '#/components/schemas/UpdateAuthorRequest'
       tags:
         - author
   /books:
@@ -54,7 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateBook'
+              $ref: '#/components/schemas/CreateBookRequest'
     patch:
       summary: 書籍更新
       operationId: updateBook
@@ -69,7 +69,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateBook'
+              $ref: '#/components/schemas/UpdateBookRequest'
     get:
       summary: 書籍の検索
       operationId: searchBook
@@ -129,7 +129,7 @@ paths:
       description: 著者をIDで取得
 components:
   schemas:
-    CreateAuthor:
+    CreateAuthorRequest:
       type: object
       description: 著者作成リクエスト
       properties:
@@ -147,10 +147,12 @@ components:
       required:
         - name
       title: 著者作成リクエスト
-    UpdateAuthor:
+      x-stoplight:
+        id: f56e044dc35c9
+    UpdateAuthorRequest:
       title: 著者更新リクエスト
       x-stoplight:
-        id: ovpwu12xvsbxi
+        id: a5e173dacc7a0
       type: object
       properties:
         id:
@@ -172,10 +174,10 @@ components:
         - id
         - name
       description: 著者更新リクエスト
-    CreateBook:
+    CreateBookRequest:
       title: 書籍作成リクエスト
       x-stoplight:
-        id: ou5v3o707qcq5
+        id: 28493631cd667
       type: object
       description: 書籍作成リクエスト
       properties:
@@ -197,10 +199,10 @@ components:
       required:
         - authorId
         - title
-    UpdateBook:
+    UpdateBookRequest:
       title: 書籍更新リクエスト
       x-stoplight:
-        id: 2i79z2qla5if5
+        id: 83c501596f526
       type: object
       description: 書籍更新リクエスト
       properties:
