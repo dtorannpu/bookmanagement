@@ -1,7 +1,11 @@
 package com.example.bookmanagement.repository.book
 
 import com.example.bookmanagement.db.jooq.gen.tables.references.BOOK
+import com.example.bookmanagement.model.Book
+import com.example.bookmanagement.model.BookAuthor
 import org.jooq.DSLContext
+import org.jooq.Operator
+import org.jooq.impl.DSL.row
 import org.springframework.stereotype.Repository
 
 /**
@@ -33,5 +37,45 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
             .set(BOOK.TITLE, title)
             .where(BOOK.ID.eq(id))
             .execute()
+    }
+
+    override fun search(
+        title: String?,
+        authorName: String?,
+        isbn: String?,
+    ): List<Book> {
+        val query =
+            create.select(
+                BOOK.ID,
+                BOOK.ISBN,
+                BOOK.TITLE,
+                row(
+                    BOOK.author().ID,
+                    BOOK.author().NAME,
+                    BOOK.author().BIRTHDAY,
+                ).mapping { id, name, birthday -> BookAuthor(authorId = id!!, name = name!!, birthday = birthday) },
+            )
+                .from(BOOK).query
+
+        if (title != null) {
+            query.addConditions(Operator.AND, BOOK.TITLE.like("%$title%"))
+        }
+
+        if (isbn != null) {
+            query.addConditions(Operator.AND, BOOK.ISBN.eq(isbn))
+        }
+
+        if (authorName != null) {
+            query.addConditions(Operator.AND, BOOK.author().NAME.like("%$authorName%"))
+        }
+
+        return query.fetch { record ->
+            Book(
+                id = record[BOOK.ID]!!,
+                isbn = record[BOOK.ISBN],
+                title = record[BOOK.TITLE]!!,
+                author = record.value4(),
+            )
+        }
     }
 }
