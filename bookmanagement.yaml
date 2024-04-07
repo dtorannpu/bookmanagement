@@ -14,6 +14,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAuthorResponse'
       requestBody:
         required: true
         content:
@@ -30,6 +34,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAuthorResponse'
       description: 著者更新
       requestBody:
         required: true
@@ -360,6 +368,32 @@ components:
         id: 2md7c6pz5k1et
       type: object
       description: 書籍更新に成功した場合のレスポンス
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: ID
+      required:
+        - id
+    CreateAuthorResponse:
+      title: CreateAuthorResponse
+      x-stoplight:
+        id: 8cc07plgas186
+      type: object
+      description: 著者登録に成功した場合のレスポンス
+      properties:
+        id:
+          type: integer
+          description: ID
+          example: 1
+      required:
+        - id
+    UpdateAuthorResponse:
+      title: UpdateAuthorResponse
+      x-stoplight:
+        id: dq90t3syc4b9x
+      type: object
+      description: 著者登録に成功した場合のレスポンス
       properties:
         id:
           type: integer

@@ -17,19 +17,20 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
     override fun create(
         name: String,
         birthday: LocalDate?,
-    ) {
-        val author = create.newRecord(AUTHOR)
-        author.name = name
-        author.birthday = birthday
-        author.store()
+    ): Int {
+        create.insertInto(AUTHOR, AUTHOR.NAME, AUTHOR.BIRTHDAY)
+            .values(name, birthday)
+            .execute()
+
+        return create.lastID().intValueExact()
     }
 
     override fun update(
         id: Int,
         name: String,
         birthday: LocalDate?,
-    ) {
-        create.update(AUTHOR)
+    ): Int {
+        return create.update(AUTHOR)
             .set(AUTHOR.NAME, name)
             .set(AUTHOR.BIRTHDAY, birthday)
             .where(AUTHOR.ID.eq(id))
