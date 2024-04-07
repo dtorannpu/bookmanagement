@@ -91,19 +91,19 @@ paths:
             example: こころ
           in: query
           name: bookTitle
-          description: 書籍タイトル
+          description: 書籍タイトル ※部分一致検索
         - schema:
             type: string
             example: 夏目　漱石
           in: query
           name: authorName
-          description: 著者名
+          description: 著者名 ※部分一致検索
         - schema:
             type: string
             example: 978-4101010137
           in: query
           name: isbn
-          description: ISBN
+          description: ISBN ※完全一致検索
   '/authors/{id}':
     parameters:
       - schema:

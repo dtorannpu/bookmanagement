@@ -4,6 +4,7 @@ import com.example.bookmanagement.db.jooq.gen.tables.references.BOOK
 import com.example.bookmanagement.model.Book
 import com.example.bookmanagement.model.BookAuthor
 import org.jooq.DSLContext
+import org.jooq.Operator
 import org.jooq.impl.DSL.row
 import org.springframework.stereotype.Repository
 
@@ -43,24 +44,38 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         authorName: String?,
         isbn: String?,
     ): List<Book> {
-        return create.select(
-            BOOK.ID,
-            BOOK.ISBN,
-            BOOK.TITLE,
-            row(
-                BOOK.author().ID,
-                BOOK.author().NAME,
-                BOOK.author().BIRTHDAY,
-            ).mapping { id, name, birthday -> BookAuthor(authorId = id!!, name = name!!, birthday = birthday) },
-        )
-            .from(BOOK)
-            .fetch { record ->
-                Book(
-                    id = record[BOOK.ID]!!,
-                    isbn = record[BOOK.ISBN],
-                    title = record[BOOK.TITLE]!!,
-                    author = record.value4(),
-                )
-            }
+        val query =
+            create.select(
+                BOOK.ID,
+                BOOK.ISBN,
+                BOOK.TITLE,
+                row(
+                    BOOK.author().ID,
+                    BOOK.author().NAME,
+                    BOOK.author().BIRTHDAY,
+                ).mapping { id, name, birthday -> BookAuthor(authorId = id!!, name = name!!, birthday = birthday) },
+            )
+                .from(BOOK).query
+
+        if (title != null) {
+            query.addConditions(Operator.AND, BOOK.TITLE.like("%$title%"))
+        }
+
+        if (isbn != null) {
+            query.addConditions(Operator.AND, BOOK.ISBN.eq(isbn))
+        }
+
+        if (authorName != null) {
+            query.addConditions(Operator.AND, BOOK.author().NAME.like("%$authorName%"))
+        }
+
+        return query.fetch { record ->
+            Book(
+                id = record[BOOK.ID]!!,
+                isbn = record[BOOK.ISBN],
+                title = record[BOOK.TITLE]!!,
+                author = record.value4(),
+            )
+        }
     }
 }
