@@ -1,6 +1,6 @@
 package com.example.bookmanagement.service.author
 
-import com.example.bookmanagement.model.AuthorDetail
+import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.repository.author.AuthorRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -29,7 +29,7 @@ class AuthorServiceImpl(private val authorRepository: AuthorRepository) :
         authorRepository.update(id, name, birthday)
     }
 
-    override fun findById(id: Int): AuthorDetail? {
+    override fun findById(id: Int): Author? {
         return authorRepository.findById(id)
     }
 }
