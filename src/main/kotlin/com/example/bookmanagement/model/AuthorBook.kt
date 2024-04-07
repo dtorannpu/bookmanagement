@@ -1,7 +1,7 @@
 package com.example.bookmanagement.model
 
 /**
- * 著者の本
+ * 著者の書籍
  *
  * @param id ID
  * @param isbn ISBN

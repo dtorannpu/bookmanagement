@@ -3,7 +3,7 @@ package com.example.bookmanagement.model
 import java.time.LocalDate
 
 /**
- * 本の著者
+ * 書籍の著者
  *
  * @param authorId ID
  * @param name 著者名
