@@ -16,8 +16,8 @@ class AuthorServiceImpl(private val authorRepository: AuthorRepository) :
     override fun create(
         name: String,
         birthday: LocalDate?,
-    ) {
-        authorRepository.create(name, birthday)
+    ): Int {
+        return authorRepository.create(name, birthday)
     }
 
     @Transactional
@@ -25,8 +25,11 @@ class AuthorServiceImpl(private val authorRepository: AuthorRepository) :
         id: Int,
         name: String,
         birthday: LocalDate?,
-    ) {
-        authorRepository.update(id, name, birthday)
+    ): Int? {
+        if (authorRepository.update(id, name, birthday) == 0) {
+            return null
+        }
+        return id
     }
 
     override fun findById(id: Int): Author? {

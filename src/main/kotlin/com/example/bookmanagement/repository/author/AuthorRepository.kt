@@ -12,23 +12,27 @@ interface AuthorRepository {
      *
      * @param name 著者名
      * @param birthday 誕生日
+     *
+     * @return ID
      */
     fun create(
         name: String,
         birthday: LocalDate?,
-    )
+    ): Int
 
     /**
      * 更新
      *
      * @param name　著者名
      * @param birthday 誕生日
+     *
+     * @return 更新件数
      */
     fun update(
         id: Int,
         name: String,
         birthday: LocalDate?,
-    )
+    ): Int
 
     /**
      * IDで著者取得
