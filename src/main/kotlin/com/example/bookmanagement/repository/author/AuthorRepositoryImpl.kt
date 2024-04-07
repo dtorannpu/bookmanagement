@@ -1,8 +1,8 @@
 package com.example.bookmanagement.repository.author
 
 import com.example.bookmanagement.db.jooq.gen.tables.references.AUTHOR
+import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.model.AuthorBook
-import com.example.bookmanagement.model.AuthorDetail
 import org.jooq.DSLContext
 import org.jooq.impl.DSL.multiset
 import org.jooq.impl.DSL.select
@@ -36,7 +36,7 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
             .execute()
     }
 
-    override fun findById(id: Int): AuthorDetail? {
+    override fun findById(id: Int): Author? {
         return create.select(
             AUTHOR.ID,
             AUTHOR.NAME,
@@ -57,7 +57,7 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
         ).from(AUTHOR)
             .where(AUTHOR.ID.eq(id))
             .fetchOne()?.let {
-                AuthorDetail(
+                Author(
                     id = it[AUTHOR.ID]!!,
                     name = it[AUTHOR.NAME]!!,
                     birthday = it[AUTHOR.BIRTHDAY],

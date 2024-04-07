@@ -1,6 +1,6 @@
 package com.example.bookmanagement.service.author
 
-import com.example.bookmanagement.model.AuthorDetail
+import com.example.bookmanagement.model.Author
 import java.time.LocalDate
 
 /**
@@ -35,7 +35,7 @@ interface AuthorService {
      * IDで著者を検索
      *
      * @param id ID
-     * @return 著者詳細
+     * @return 著者
      */
-    fun findById(id: Int): AuthorDetail?
+    fun findById(id: Int): Author?
 }
