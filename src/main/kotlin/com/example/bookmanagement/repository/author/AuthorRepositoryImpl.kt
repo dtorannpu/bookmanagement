@@ -52,7 +52,7 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
                             isbn = bookRecord.get(AUTHOR.book().ISBN),
                             title = bookRecord.get(AUTHOR.book().TITLE)!!,
                         )
-                    } 
+                    }
                 },
         ).from(AUTHOR)
             .where(AUTHOR.ID.eq(id))
