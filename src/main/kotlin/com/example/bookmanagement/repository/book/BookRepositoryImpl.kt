@@ -69,12 +69,12 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
             query.addConditions(Operator.AND, BOOK.author().NAME.like("%$authorName%"))
         }
 
-        return query.fetch { record ->
+        return query.fetch {
             Book(
-                id = record[BOOK.ID]!!,
-                isbn = record[BOOK.ISBN],
-                title = record[BOOK.TITLE]!!,
-                author = record.value4(),
+                id = it[BOOK.ID]!!,
+                isbn = it[BOOK.ISBN],
+                title = it[BOOK.TITLE]!!,
+                author = it.value4(),
             )
         }
     }

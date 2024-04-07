@@ -46,29 +46,22 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
                     .from(AUTHOR.book()),
             )
                 .convertFrom { r ->
-                    r.map { bookRecord ->
+                    r.map {
                         AuthorBook(
-                            id = bookRecord.get(AUTHOR.book().ID)!!,
-                            isbn = bookRecord.get(AUTHOR.book().ISBN),
-                            title = bookRecord.get(AUTHOR.book().TITLE)!!,
+                            id = it[AUTHOR.book().ID]!!,
+                            isbn = it[AUTHOR.book().ISBN],
+                            title = it[AUTHOR.book().TITLE]!!,
                         )
                     }
                 },
         ).from(AUTHOR)
             .where(AUTHOR.ID.eq(id))
-            .fetchOne()?.let { record ->
+            .fetchOne()?.let {
                 AuthorDetail(
-                    id = record.get(AUTHOR.ID)!!,
-                    name = record.get(AUTHOR.NAME)!!,
-                    birthday = record.get(AUTHOR.BIRTHDAY),
-                    books = record.value4(),
-//                        record.value4().map { book ->
-//                            AuthorBook(
-//                                id = book.id,
-//                                isbn = book.isbn,
-//                                title = book.title,
-//                            )
-//                        },
+                    id = it[AUTHOR.ID]!!,
+                    name = it[AUTHOR.NAME]!!,
+                    birthday = it[AUTHOR.BIRTHDAY],
+                    books = it.value4(),
                 )
             }
     }
