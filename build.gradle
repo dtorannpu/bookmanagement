@@ -17,6 +17,7 @@ plugins {
     id "co.uzzu.dotenv.gradle" version "4.0.0"
     id "org.flywaydb.flyway" version "10.11.0"
     id "org.openapi.generator" version "7.2.0"
+    id "jacoco"
 }
 
 group = "com.example"
@@ -47,6 +48,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect"
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0"
+    testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.springframework.boot:spring-boot-testcontainers"
+    testImplementation "org.testcontainers:postgresql"
     developmentOnly "org.springframework.boot:spring-boot-docker-compose"
     runtimeOnly "org.postgresql:postgresql"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -55,6 +59,9 @@ dependencies {
     jooqCodegen "org.jooq:jooq-meta"
     jooqCodegen "org.jooq:jooq-codegen"
     jooqCodegen "co.uzzu.dotenv:gradle:4.0.0"
+    testImplementation "com.ninja-squad:DbSetup:2.1.0"
+    testImplementation "com.ninja-squad:DbSetup-kotlin:2.1.0"
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
 }
 
 apply plugin: "co.uzzu.dotenv.gradle"
@@ -68,6 +75,15 @@ tasks.withType(KotlinCompile).configureEach {
 
 tasks.named("test") {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+
+    classDirectories.setFrom(classDirectories.files.collect {
+        fileTree(dir: it, excludes: ["**/api/*", "**/db/**"])
+    })
 }
 
 jooq {
