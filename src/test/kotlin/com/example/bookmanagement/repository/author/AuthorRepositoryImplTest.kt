@@ -2,24 +2,54 @@ package com.example.bookmanagement.repository.author
 
 import com.example.bookmanagement.db.jooq.gen.tables.references.AUTHOR
 import com.example.bookmanagement.db.jooq.gen.tables.references.BOOK
-import com.example.bookmanagement.repository.RepositoryTestBase
-import kotlin.test.Test
+import org.jooq.DSLContext
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
+import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.junit.jupiter.Testcontainers
+import java.time.LocalDate
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
-import org.jooq.DSLContext
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import java.time.LocalDate
 
 @SpringBootTest
+@Testcontainers
 class AuthorRepositoryImplTest
     @Autowired
     constructor(
         private val create: DSLContext,
         private val authorRepository: AuthorRepository,
-    ) : RepositoryTestBase() {
+    ) {
+        companion object {
+            private val db = PostgreSQLContainer("postgres:latest")
+
+            @BeforeAll
+            @JvmStatic
+            fun startDBContainer() {
+                db.start()
+            }
+
+            @AfterAll
+            @JvmStatic
+            fun stopDBContainer() {
+                db.stop()
+            }
+
+            @DynamicPropertySource
+            @JvmStatic
+            fun registerDBContainer(registry: DynamicPropertyRegistry) {
+                registry.add("spring.datasource.url", db::getJdbcUrl)
+                registry.add("spring.datasource.username", db::getUsername)
+                registry.add("spring.datasource.password", db::getPassword)
+            }
+        }
+
         @Test
         fun testCreateAuthor() {
             val id = authorRepository.create("岡本　太郎", LocalDate.of(2000, 1, 31))
