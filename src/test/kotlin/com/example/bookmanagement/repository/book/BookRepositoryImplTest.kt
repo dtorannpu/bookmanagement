@@ -65,4 +65,36 @@ class BookRepositoryImplTest
             assertEquals("1234567890", actual.isbn)
             assertEquals("こころ", actual.title)
         }
+
+        @Test
+        fun testUpdateBook() {
+            val changeBeforeAuthor = create.newRecord(AUTHOR)
+            changeBeforeAuthor.name = "山田　太郎"
+            changeBeforeAuthor.birthday = LocalDate.of(2023, 5, 13)
+            changeBeforeAuthor.store()
+            val changeBeforeAuthorAuthorId = changeBeforeAuthor.id!!
+
+            val changeAfterAuthor = create.newRecord(AUTHOR)
+            changeAfterAuthor.name = "山田　次郎"
+            changeAfterAuthor.birthday = LocalDate.of(2000, 1, 1)
+            changeAfterAuthor.store()
+            val changeAfterAuthorAuthorId = changeAfterAuthor.id!!
+
+            val book = create.newRecord(BOOK)
+            book.isbn = "1234567890"
+            book.title = "こころ"
+            book.authorId = changeBeforeAuthorAuthorId
+            book.store()
+            val bookId = book.id!!
+
+            val updateCount = bookRepository.update(bookId, "0123456789", changeAfterAuthorAuthorId, "坊ちゃん")
+
+            assertEquals(1, updateCount)
+
+            val actual = create.fetchOne(BOOK, BOOK.ID.eq(bookId))
+            assertNotNull(actual)
+            assertEquals(changeAfterAuthorAuthorId, actual.authorId)
+            assertEquals("0123456789", actual.isbn)
+            assertEquals("坊ちゃん", actual.title)
+        }
     }
