@@ -16,6 +16,7 @@ import java.time.LocalDate
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @Testcontainers
