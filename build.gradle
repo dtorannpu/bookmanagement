@@ -62,6 +62,7 @@ dependencies {
     testImplementation "com.ninja-squad:DbSetup:2.1.0"
     testImplementation "com.ninja-squad:DbSetup-kotlin:2.1.0"
     testImplementation "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:5.3.1"
 }
 
 apply plugin: "co.uzzu.dotenv.gradle"
