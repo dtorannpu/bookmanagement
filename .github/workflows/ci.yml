@@ -42,6 +42,3 @@ jobs:
 
     - name: Check
       run: ./gradlew check
-
-    - name: Build
-      run: ./gradlew build
