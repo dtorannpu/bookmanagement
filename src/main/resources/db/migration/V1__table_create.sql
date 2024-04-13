@@ -1,6 +1,6 @@
 -- 著者
 create table author (
-      id serial not null
+      id integer not null GENERATED ALWAYS AS IDENTITY
     , name character varying(100) not null
     , birthday date
     , constraint author_PKC primary key (id)
@@ -8,7 +8,7 @@ create table author (
 
 -- 書籍
 create table book (
-      id serial not null
+      id integer not null GENERATED ALWAYS AS IDENTITY
     , isbn character varying(17)
     , author_id integer not null
     , title character varying(100) not null
