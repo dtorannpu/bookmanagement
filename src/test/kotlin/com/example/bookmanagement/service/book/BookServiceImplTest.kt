@@ -24,14 +24,14 @@ class BookServiceImplTest {
             }
         val authorRepositoryMock =
             mock<AuthorRepository> {
-                on { findById(1) } doReturn Author(1, "夏目 漱石", null, listOf())
+                on { existsById(1) } doReturn true
             }
         val bookService = BookServiceImpl(bookRepositoryMock, authorRepositoryMock)
 
         val actual = bookService.create("123", 1, "坊ちゃん")
         assertEquals(2, actual)
 
-        verify(authorRepositoryMock, times(1)).findById(1)
+        verify(authorRepositoryMock, times(1)).existsById(1)
         verify(bookRepositoryMock, times(1)).create("123", 1, "坊ちゃん")
     }
 
@@ -43,14 +43,14 @@ class BookServiceImplTest {
             }
         val authorRepositoryMock =
             mock<AuthorRepository> {
-                on { findById(1) } doReturn null
+                on { existsById(1) } doReturn false
             }
         val bookService = BookServiceImpl(bookRepositoryMock, authorRepositoryMock)
 
         val actual = bookService.create("123", 1, "坊ちゃん")
         assertNull(actual)
 
-        verify(authorRepositoryMock, times(1)).findById(1)
+        verify(authorRepositoryMock, times(1)).existsById(1)
         verify(bookRepositoryMock, never()).create(any(), any(), any())
     }
 
@@ -62,14 +62,14 @@ class BookServiceImplTest {
             }
         val authorRepositoryMock =
             mock<AuthorRepository> {
-                on { findById(1) } doReturn Author(1, "夏目 漱石", null, listOf())
+                on { existsById(1) } doReturn true
             }
         val bookService = BookServiceImpl(bookRepositoryMock, authorRepositoryMock)
 
         val actual = bookService.update(2, "123", 1, "坊ちゃん")
         assertEquals(2, actual)
 
-        verify(authorRepositoryMock, times(1)).findById(1)
+        verify(authorRepositoryMock, times(1)).existsById(1)
         verify(bookRepositoryMock, times(1)).update(2, "123", 1, "坊ちゃん")
     }
 
@@ -81,14 +81,14 @@ class BookServiceImplTest {
             }
         val authorRepositoryMock =
             mock<AuthorRepository> {
-                on { findById(1) } doReturn null
+                on { existsById(1) } doReturn false
             }
         val bookService = BookServiceImpl(bookRepositoryMock, authorRepositoryMock)
 
         val actual = bookService.update(2, "123", 1, "坊ちゃん")
         assertNull(actual)
 
-        verify(authorRepositoryMock, times(1)).findById(1)
+        verify(authorRepositoryMock, times(1)).existsById(1)
         verify(bookRepositoryMock, never()).create(any(), any(), any())
     }
 
@@ -100,14 +100,14 @@ class BookServiceImplTest {
             }
         val authorRepositoryMock =
             mock<AuthorRepository> {
-                on { findById(1) } doReturn Author(1, "夏目 漱石", null, listOf())
+                on { existsById(1) } doReturn true
             }
         val bookService = BookServiceImpl(bookRepositoryMock, authorRepositoryMock)
 
         val actual = bookService.update(2, "123", 1, "坊ちゃん")
         assertNull(actual)
 
-        verify(authorRepositoryMock, times(1)).findById(1)
+        verify(authorRepositoryMock, times(1)).existsById(1)
         verify(bookRepositoryMock, times(1)).update(2, "123", 1, "坊ちゃん")
     }
 
