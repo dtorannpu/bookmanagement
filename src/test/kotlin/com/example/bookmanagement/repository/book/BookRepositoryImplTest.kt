@@ -2,55 +2,25 @@ package com.example.bookmanagement.repository.book
 
 import com.example.bookmanagement.db.jooq.gen.tables.references.AUTHOR
 import com.example.bookmanagement.db.jooq.gen.tables.references.BOOK
+import com.example.bookmanagement.repository.RepositoryTest
 import org.jooq.DSLContext
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
 import org.springframework.transaction.annotation.Transactional
-import org.testcontainers.containers.PostgreSQLContainer
-import org.testcontainers.junit.jupiter.Testcontainers
 import java.time.LocalDate
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @SpringBootTest
-@Testcontainers
 @Transactional
 class BookRepositoryImplTest
     @Autowired
     constructor(
         private val create: DSLContext,
         private val bookRepository: BookRepository,
-    ) {
-        companion object {
-            private val db = PostgreSQLContainer("postgres:latest")
-
-            @BeforeAll
-            @JvmStatic
-            fun startDBContainer() {
-                db.start()
-            }
-
-            @AfterAll
-            @JvmStatic
-            fun stopDBContainer() {
-                db.stop()
-            }
-
-            @DynamicPropertySource
-            @JvmStatic
-            fun registerDBContainer(registry: DynamicPropertyRegistry) {
-                registry.add("spring.datasource.url", db::getJdbcUrl)
-                registry.add("spring.datasource.username", db::getUsername)
-                registry.add("spring.datasource.password", db::getPassword)
-            }
-        }
-
+    ) : RepositoryTest() {
         @Test
         fun testCreateBook() {
             val author = create.newRecord(AUTHOR)
