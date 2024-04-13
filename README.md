@@ -28,5 +28,5 @@ docker compose up
 ```
 
 ## OpenAPIページ
-Spring Bootアプリケーションを起動して以下のリンクを表示
+Spring Bootアプリケーションを起動して以下のリンクを表示  
 http://localhost:8080/swagger-ui.html
