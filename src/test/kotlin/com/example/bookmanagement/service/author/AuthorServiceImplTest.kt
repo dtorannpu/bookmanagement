@@ -4,6 +4,7 @@ import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.repository.author.AuthorRepository
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import java.time.LocalDate
@@ -17,7 +18,7 @@ class AuthorServiceImplTest {
     fun testCreate() {
         val mock =
             mock<AuthorRepository> {
-                on { create("山田　太郎", LocalDate.of(2000, 1, 1)) } doReturn 1
+                on { create(any(), any()) } doReturn 1
             }
         val authorService = AuthorServiceImpl(mock)
 
@@ -34,7 +35,7 @@ class AuthorServiceImplTest {
     fun testUpdate() {
         val mock =
             mock<AuthorRepository> {
-                on { update(1, "山田　太郎", LocalDate.of(2000, 1, 1)) } doReturn 1
+                on { update(any(), any(), any()) } doReturn 1
             }
         val authorService = AuthorServiceImpl(mock)
 
@@ -52,7 +53,7 @@ class AuthorServiceImplTest {
     fun testUpdateNoUpdateTarget() {
         val mock =
             mock<AuthorRepository> {
-                on { update(1, "山田　太郎", LocalDate.of(2000, 1, 1)) } doReturn 1
+                on { update(any(), any(), any()) } doReturn 0
             }
         val authorService = AuthorServiceImpl(mock)
 
@@ -70,7 +71,7 @@ class AuthorServiceImplTest {
     fun testSearch() {
         val mock =
             mock<AuthorRepository> {
-                on { findById(1) } doReturn Author(1, "山田太郎", null, listOf())
+                on { findById(any()) } doReturn Author(1, "山田太郎", null, listOf())
             }
         val authorService = AuthorServiceImpl(mock)
 
