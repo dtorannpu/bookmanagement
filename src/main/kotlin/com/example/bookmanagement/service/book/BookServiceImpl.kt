@@ -17,7 +17,7 @@ class BookServiceImpl(private val bookRepository: BookRepository, private val au
         authorId: Int,
         title: String,
     ): Int? {
-        if (authorRepository.findById(authorId) == null) {
+        if (!authorRepository.existsById(authorId)) {
             return null
         }
         return bookRepository.create(isbn, authorId, title)
@@ -30,7 +30,7 @@ class BookServiceImpl(private val bookRepository: BookRepository, private val au
         authorId: Int,
         title: String,
     ): Int? {
-        if (authorRepository.findById(authorId) == null) {
+        if (!authorRepository.existsById(authorId)) {
             return null
         }
         if (bookRepository.update(id, isbn, authorId, title) == 0) {

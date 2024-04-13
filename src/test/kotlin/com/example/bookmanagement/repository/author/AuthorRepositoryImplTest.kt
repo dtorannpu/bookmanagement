@@ -15,6 +15,7 @@ import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.time.LocalDate
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -142,5 +143,21 @@ class AuthorRepositoryImplTest
             assertEquals("9780720612974", resultBook1.isbn)
             assertEquals("坊ちゃん", resultBook2.title)
             assertNull(resultBook2.isbn)
+        }
+
+        @Test
+        fun testExistsById() {
+            val author = create.newRecord(AUTHOR)
+            author.name = "夏目　漱石"
+            author.birthday = LocalDate.of(2023, 5, 13)
+            author.store()
+            val authorId = author.id!!
+
+            assertTrue(authorRepository.existsById(authorId))
+        }
+
+        @Test
+        fun testExistsByIdNotExists() {
+            assertFalse(authorRepository.existsById(0))
         }
     }

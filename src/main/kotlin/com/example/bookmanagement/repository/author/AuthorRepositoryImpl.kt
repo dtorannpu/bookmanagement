@@ -66,4 +66,13 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
                 )
             }
     }
+
+    override fun existsById(id: Int): Boolean {
+        val count =
+            create.selectCount()
+                .from(AUTHOR)
+                .where(AUTHOR.ID.eq(id))
+                .fetchOne(0, Int::class.java)
+        return count == 1
+    }
 }

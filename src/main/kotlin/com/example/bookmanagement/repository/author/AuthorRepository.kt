@@ -41,4 +41,11 @@ interface AuthorRepository {
      * @return 著者
      */
     fun findById(id: Int): Author?
+
+    /**
+     * 著者IDの存在チェック
+     *
+     * @param id ID
+     */
+    fun existsById(id: Int): Boolean
 }
