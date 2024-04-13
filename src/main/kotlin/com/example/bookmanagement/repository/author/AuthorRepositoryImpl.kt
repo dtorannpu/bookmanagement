@@ -18,11 +18,12 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
         name: String,
         birthday: LocalDate?,
     ): Int {
-        create.insertInto(AUTHOR, AUTHOR.NAME, AUTHOR.BIRTHDAY)
-            .values(name, birthday)
-            .execute()
+        val author = create.newRecord(AUTHOR)
+        author.name = name
+        author.birthday = birthday
+        author.store()
 
-        return create.lastID().intValueExact()
+        return author.id!!
     }
 
     override fun update(
