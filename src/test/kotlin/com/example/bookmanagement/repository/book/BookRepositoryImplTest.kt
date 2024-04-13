@@ -4,23 +4,30 @@ import com.example.bookmanagement.db.jooq.gen.tables.references.AUTHOR
 import com.example.bookmanagement.db.jooq.gen.tables.references.BOOK
 import com.example.bookmanagement.repository.RepositoryTest
 import org.jooq.DSLContext
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.jooq.JooqTest
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
-@SpringBootTest
+@JooqTest
 @Transactional
 class BookRepositoryImplTest
     @Autowired
     constructor(
         private val create: DSLContext,
-        private val bookRepository: BookRepository,
     ) : RepositoryTest() {
+        private lateinit var bookRepository: BookRepository
+
+        @BeforeEach
+        fun setUp() {
+            bookRepository = BookRepositoryImpl(create)
+        }
+
         @Test
         fun testCreateBook() {
             val author = create.newRecord(AUTHOR)
