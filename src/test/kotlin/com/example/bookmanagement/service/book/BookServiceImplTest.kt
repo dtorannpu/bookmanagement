@@ -1,6 +1,5 @@
 package com.example.bookmanagement.service.book
 
-import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.model.Book
 import com.example.bookmanagement.model.BookAuthor
 import com.example.bookmanagement.repository.author.AuthorRepository
