@@ -6,21 +6,21 @@ val jooqVersion: String by project
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-database-postgresql:11.3.3")
+        classpath(libs.org.flywaydb.flyway.database.postgresql)
     }
 }
 
 plugins {
-    id("org.springframework.boot") version "3.2.4"
-    id("io.spring.dependency-management") version "1.1.4"
-    id("org.jetbrains.kotlin.jvm") version "1.9.23"
-    id("org.jetbrains.kotlin.plugin.spring") version "1.9.23"
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
-    id("org.jooq.jooq-codegen-gradle") version "3.19.7"
-    id("co.uzzu.dotenv.gradle") version "4.0.0"
-    id("org.flywaydb.flyway") version "11.3.3"
-    id("org.openapi.generator") version "7.4.0"
-    id("jacoco")
+    alias(libs.plugins.org.springframework.boot)
+    alias(libs.plugins.io.spring.dependency.management)
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.spring)
+    alias(libs.plugins.org.jlleitschuh.gradle.ktlint)
+    alias(libs.plugins.org.jooq.jooq.codegen.gradle)
+    alias(libs.plugins.co.uzzu.dotenv.gradle)
+    alias(libs.plugins.org.flywaydb.flyway)
+    alias(libs.plugins.org.openapi.generator)
+    alias(libs.plugins.jacoco)
 }
 
 group = "com.example"
@@ -46,27 +46,27 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-jooq")
-    implementation("org.jooq:jooq:$jooqVersion")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.flywaydb:flyway-core")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.testcontainers:postgresql")
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    jooqCodegen("org.postgresql:postgresql")
-    jooqCodegen("org.jooq:jooq:$jooqVersion")
-    jooqCodegen("org.jooq:jooq-meta:$jooqVersion")
-    jooqCodegen("org.jooq:jooq-codegen:$jooqVersion")
-    jooqCodegen("co.uzzu.dotenv:gradle:4.0.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
+    implementation(libs.org.springframework.boot.spring.boot.starter.jooq)
+    implementation(libs.org.jooq.jooq)
+    implementation(libs.org.springframework.boot.spring.boot.starter.web)
+    implementation(libs.com.fasterxml.jackson.module.jackson.module.kotlin)
+    implementation(libs.org.flywaydb.flyway.core)
+    implementation(libs.org.jetbrains.kotlin.kotlin.reflect)
+    implementation(libs.org.springframework.boot.spring.boot.starter.validation)
+    implementation(libs.org.springdoc.springdoc.openapi.starter.webmvc.ui)
+    testImplementation(libs.org.testcontainers.junit.jupiter)
+    testImplementation(libs.org.springframework.boot.spring.boot.testcontainers)
+    testImplementation(libs.org.testcontainers.postgresql)
+    developmentOnly(libs.org.springframework.boot.spring.boot.docker.compose)
+    runtimeOnly(libs.org.postgresql.postgresql)
+    testImplementation(libs.org.springframework.boot.spring.boot.starter.test)
+    jooqCodegen(libs.org.postgresql.postgresql)
+    jooqCodegen(libs.org.jooq.jooq)
+    jooqCodegen(libs.org.jooq.jooq.meta)
+    jooqCodegen(libs.org.jooq.jooq.codegen)
+    jooqCodegen(libs.co.uzzu.dotenv.gradle)
+    testImplementation(libs.org.jetbrains.kotlin.kotlin.test)
+    testImplementation(libs.org.mockito.kotlin.mockito.kotlin)
 }
 
 kotlin {

@@ -1,0 +1,47 @@
+[versions]
+org-springframework-boot = "3.2.4"
+io-spring-dependency-management = "1.1.4"
+org-jetbrains-kotlin-jvm = "1.9.23"
+org-jetbrains-kotlin-plugin-spring = "1.9.23"
+org-jlleitschuh-gradle-ktlint = "12.1.0"
+org-jooq-jooq-codegen-gradle = "3.19.7"
+co-uzzu-dotenv-gradle = "4.0.0"
+flyway = "11.3.3"
+org-openapi-generator = "7.4.0"
+jooq = "3.19.7"
+org-springdoc-springdoc-openapi-starter-webmvc-ui = "2.5.0"
+org-mockito-kotlin-mockito-kotlin = "5.3.1"
+
+[libraries]
+org-jooq-jooq = { group = "org.jooq", name = "jooq", version.ref = "jooq" }
+org-jooq-jooq-meta = { group = "org.jooq", name = "jooq-meta", version.ref = "jooq" }
+org-jooq-jooq-codegen = { group = "org.jooq", name = "jooq-codegen", version.ref = "jooq" }
+co-uzzu-dotenv-gradle = { group = "co.uzzu.dotenv", name = "gradle", version.ref = "co-uzzu-dotenv-gradle" }
+com-fasterxml-jackson-module-jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
+org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core" }
+org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
+org-jetbrains-kotlin-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
+org-mockito-kotlin-mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "org-mockito-kotlin-mockito-kotlin" }
+org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql" }
+org-springdoc-springdoc-openapi-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "org-springdoc-springdoc-openapi-starter-webmvc-ui" }
+org-springframework-boot-spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose" }
+org-springframework-boot-spring-boot-starter-jooq = { group = "org.springframework.boot", name = "spring-boot-starter-jooq" }
+org-springframework-boot-spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+org-springframework-boot-spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
+org-springframework-boot-spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+org-springframework-boot-spring-boot-testcontainers = { group = "org.springframework.boot", name = "spring-boot-testcontainers" }
+org-testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
+org-testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql" }
+org-flywaydb-flyway-database-postgresql = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
+
+[plugins]
+org-springframework-boot = { id = "org.springframework.boot", version.ref = "org-springframework-boot" }
+io-spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "io-spring-dependency-management" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+org-jetbrains-kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "org-jetbrains-kotlin-plugin-spring" }
+org-jlleitschuh-gradle-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "org-jlleitschuh-gradle-ktlint" }
+org-jooq-jooq-codegen-gradle = { id = "org.jooq.jooq-codegen-gradle", version.ref = "org-jooq-jooq-codegen-gradle" }
+co-uzzu-dotenv-gradle = { id = "co.uzzu.dotenv.gradle", version.ref = "co-uzzu-dotenv-gradle" }
+org-flywaydb-flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
+org-openapi-generator = { id = "org.openapi.generator", version.ref = "org-openapi-generator" }
+jacoco = { id = "jacoco" }
