@@ -1,30 +1,35 @@
+import org.flywaydb.gradle.task.AbstractFlywayTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jooq.codegen.gradle.CodegenTask
+
+val jooqVersion: String by project
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-database-postgresql:10.11.0")
+        classpath("org.flywaydb:flyway-database-postgresql:11.3.3")
     }
 }
 
 plugins {
-    id "org.springframework.boot" version "3.2.4"
-    id "io.spring.dependency-management" version "1.1.4"
-    id "org.jetbrains.kotlin.jvm" version "1.9.23"
-    id "org.jetbrains.kotlin.plugin.spring" version "1.9.23"
-    id "org.jlleitschuh.gradle.ktlint" version "12.1.0"
-    id "org.jooq.jooq-codegen-gradle" version "${jooqVersion}"
-    id "co.uzzu.dotenv.gradle" version "4.0.0"
-    id "org.flywaydb.flyway" version "10.11.0"
-    id "org.openapi.generator" version "7.4.0"
-    id "jacoco"
+    id("org.springframework.boot") version "3.2.4"
+    id("io.spring.dependency-management") version "1.1.4"
+    id("org.jetbrains.kotlin.jvm") version "1.9.23"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.9.23"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    id("org.jooq.jooq-codegen-gradle") version "3.19.7"
+    id("co.uzzu.dotenv.gradle") version "4.0.0"
+    id("org.flywaydb.flyway") version "11.3.3"
+    id("org.openapi.generator") version "7.4.0"
+    id("jacoco")
 }
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = "21"
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 kotlin.sourceSets.main {
@@ -33,56 +38,54 @@ kotlin.sourceSets.main {
 }
 
 repositories {
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
     mavenCentral()
+
+    maven {
+        url = uri("https://plugins.gradle.org/m2/")
+    }
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-jooq"
-    implementation "org.jooq:jooq:${jooqVersion}"
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
-    implementation "org.flywaydb:flyway-core"
-    implementation "org.jetbrains.kotlin:kotlin-reflect"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-testcontainers"
-    testImplementation "org.testcontainers:postgresql"
-    developmentOnly "org.springframework.boot:spring-boot-docker-compose"
-    runtimeOnly "org.postgresql:postgresql"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    jooqCodegen "org.postgresql:postgresql"
-    jooqCodegen "org.jooq:jooq:${jooqVersion}"
-    jooqCodegen "org.jooq:jooq-meta:${jooqVersion}"
-    jooqCodegen "org.jooq:jooq-codegen:${jooqVersion}"
-    jooqCodegen "co.uzzu.dotenv:gradle:4.0.0"
-    testImplementation "org.jetbrains.kotlin:kotlin-test"
-    testImplementation "org.mockito.kotlin:mockito-kotlin:5.3.1"
+    implementation("org.springframework.boot:spring-boot-starter-jooq")
+    implementation("org.jooq:jooq:$jooqVersion")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.testcontainers:postgresql")
+    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+    runtimeOnly("org.postgresql:postgresql")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    jooqCodegen("org.postgresql:postgresql")
+    jooqCodegen("org.jooq:jooq:$jooqVersion")
+    jooqCodegen("org.jooq:jooq-meta:$jooqVersion")
+    jooqCodegen("org.jooq:jooq-codegen:$jooqVersion")
+    jooqCodegen("co.uzzu.dotenv:gradle:4.0.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
 }
 
-apply plugin: "co.uzzu.dotenv.gradle"
-
-tasks.withType(KotlinCompile).configureEach {
+kotlin {
     compilerOptions {
-        freeCompilerArgs.add("-Xjsr305=strict")
+        freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = JvmTarget.JVM_21
     }
 }
 
-tasks.named("test") {
+tasks.test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
+    extensions.configure(JacocoTaskExtension::class) {
+        excludes = listOf("**/api/*", "**/db/**")
+    }
+    finalizedBy(tasks.jacocoTestReport)
 }
 
-jacocoTestReport {
-    dependsOn test
-
-    classDirectories.setFrom(classDirectories.files.collect {
-        fileTree(dir: it, excludes: ["**/api/*", "**/db/**"])
-    })
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
 }
 
 jooq {
@@ -132,39 +135,40 @@ jooq {
             // Generation flags: See advanced configuration properties
             generate {
                 // Tell the KotlinGenerator to generate properties in addition to methods for these paths. Default is true.
-                implicitJoinPathsAsKotlinProperties = true
+
+                isImplicitJoinPathsAsKotlinProperties = true
 
                 // Workaround for Kotlin generating setX() setters instead of setIsX() in byte code for mutable properties called
                 // <code>isX</code>. Default is true.
-                kotlinSetterJvmNameAnnotationsOnIsPrefix = true
+                isKotlinSetterJvmNameAnnotationsOnIsPrefix = true
 
                 // Generate POJOs as data classes, when using the KotlinGenerator. Default is true.
-                pojosAsKotlinDataClasses = true
+                isPojosAsKotlinDataClasses = true
 
                 // Generate non-nullable types on POJO attributes, where column is not null. Default is false.
-                kotlinNotNullPojoAttributes = true
+                isKotlinNotNullPojoAttributes = true
 
                 // Generate non-nullable types on Record attributes, where column is not null. Default is false.
-                kotlinNotNullRecordAttributes = true
+                isKotlinNotNullRecordAttributes = true
 
                 // Generate non-nullable types on interface attributes, where column is not null. Default is false.
-                kotlinNotNullInterfaceAttributes = true
+                isKotlinNotNullInterfaceAttributes = true
 
                 // Generate defaulted nullable POJO attributes. Default is true.
-                kotlinDefaultedNullablePojoAttributes = false
+                isKotlinDefaultedNullablePojoAttributes = false
 
                 // Generate defaulted nullable Record attributes. Default is true.
-                kotlinDefaultedNullableRecordAttributes = false
+                isKotlinDefaultedNullableRecordAttributes = false
 
-//                // Generate the DAO classes
-//                daos = true
-//
-//                // Annotate DAOs (and other types) with spring annotations, such as @Repository and @Autowired
-//                // for auto-wiring the Configuration instance, e.g. from Spring Boot's jOOQ starter
-//                springAnnotations = true
-//
-//                // Generate Spring-specific DAOs containing @Transactional annotations
-//                springDao = true
+                //                // Generate the DAO classes
+                //                daos = true
+                //
+                //                // Annotate DAOs (and other types) with spring annotations, such as @Repository and @Autowired
+                //                // for auto-wiring the Configuration instance, e.g. from Spring Boot's jOOQ starter
+                //                springAnnotations = true
+                //
+                //                // Generate Spring-specific DAOs containing @Transactional annotations
+                //                springDao = true
             }
             target {
 
@@ -177,9 +181,18 @@ jooq {
                 packageName = "com.example.bookmanagement.db.jooq.gen"
 
                 // The destination directory of your generated classes
-                //directory = "src/main/kotlin"
+                // directory = "src/main/kotlin"
             }
         }
+    }
+}
+
+tasks {
+    withType<AbstractFlywayTask> {
+        notCompatibleWithConfigurationCache("because https://github.com/flyway/flyway/issues/3550")
+    }
+    withType<CodegenTask> {
+        notCompatibleWithConfigurationCache("because https://github.com/jOOQ/jOOQ/issues/16997")
     }
 }
 
@@ -194,7 +207,6 @@ ktlint {
         exclude { element ->
             element.file.path.contains("generated")
         }
-        //exclude("**/generated-sources/**")
         include("**/kotlin/**")
     }
 }
@@ -202,13 +214,20 @@ ktlint {
 openApiGenerate {
     generatorName.set("kotlin-spring")
     inputSpec.set("$rootDir/bookmanagement.yaml")
-    outputDir.set(layout.buildDirectory.dir("generated-sources/api").get().toString())
+    outputDir.set(
+        layout.buildDirectory
+            .dir("generated-sources/api")
+            .get()
+            .toString(),
+    )
     apiPackage.set("com.example.bookmanagement.api")
     invokerPackage.set("com.example.bookmanagement.api.invoker")
     modelPackage.set("com.example.bookmanagement.api.model")
-    configOptions.set([
-        dateLibrary: "java8" ,
-        useSpringBoot3: "true",
-        interfaceOnly: "true",
-    ])
+    configOptions.set(
+        mapOf(
+            "dateLibrary" to "java8",
+            "useSpringBoot3" to "true",
+            "interfaceOnly" to "true",
+        ),
+    )
 }
