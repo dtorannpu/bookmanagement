@@ -1,16 +1,18 @@
 [versions]
-org-springframework-boot = "3.2.4"
-io-spring-dependency-management = "1.1.4"
-org-jetbrains-kotlin-jvm = "1.9.23"
-org-jetbrains-kotlin-plugin-spring = "1.9.23"
-org-jlleitschuh-gradle-ktlint = "12.1.0"
+org-springframework-boot = "3.4.3"
+io-spring-dependency-management = "1.1.7"
+org-jetbrains-kotlin-jvm = "2.1.10"
+org-jetbrains-kotlin-plugin-spring = "2.1.10"
+org-jlleitschuh-gradle-ktlint = "12.1.2"
 org-jooq-jooq-codegen-gradle = "3.19.7"
 co-uzzu-dotenv-gradle = "4.0.0"
 flyway = "11.3.3"
-org-openapi-generator = "7.4.0"
-jooq = "3.19.7"
-org-springdoc-springdoc-openapi-starter-webmvc-ui = "2.5.0"
-org-mockito-kotlin-mockito-kotlin = "5.3.1"
+org-openapi-generator = "7.11.0"
+jooq = "3.20.1"
+org-springdoc-springdoc-openapi-starter-webmvc-ui = "2.8.5"
+org-mockito-kotlin-mockito-kotlin = "5.4.0"
+org-postgresql-postgresql = "42.7.4"
+ktlint = "1.5.0"
 
 [libraries]
 org-jooq-jooq = { group = "org.jooq", name = "jooq", version.ref = "jooq" }
@@ -22,7 +24,7 @@ org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core" }
 org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
 org-jetbrains-kotlin-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
 org-mockito-kotlin-mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "org-mockito-kotlin-mockito-kotlin" }
-org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql" }
+org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "org-postgresql-postgresql" }
 org-springdoc-springdoc-openapi-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "org-springdoc-springdoc-openapi-starter-webmvc-ui" }
 org-springframework-boot-spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose" }
 org-springframework-boot-spring-boot-starter-jooq = { group = "org.springframework.boot", name = "spring-boot-starter-jooq" }

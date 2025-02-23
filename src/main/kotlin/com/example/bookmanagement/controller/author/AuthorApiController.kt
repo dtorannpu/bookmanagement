@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController
  * 著者コントローラー
  */
 @RestController
-class AuthorApiController(private val authorService: AuthorService) : AuthorsApi {
+class AuthorApiController(
+    private val authorService: AuthorService,
+) : AuthorsApi {
     override fun createAuthor(createAuthorRequest: CreateAuthorRequest): ResponseEntity<CreateAuthorResponse> {
         val id = authorService.create(createAuthorRequest.name, createAuthorRequest.birthday)
         return ResponseEntity.ok(CreateAuthorResponse(id))

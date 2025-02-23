@@ -10,15 +10,14 @@ import java.time.LocalDate
  * 著者サービス実装
  */
 @Service
-class AuthorServiceImpl(private val authorRepository: AuthorRepository) :
-    AuthorService {
+class AuthorServiceImpl(
+    private val authorRepository: AuthorRepository,
+) : AuthorService {
     @Transactional
     override fun create(
         name: String,
         birthday: LocalDate?,
-    ): Int {
-        return authorRepository.create(name, birthday)
-    }
+    ): Int = authorRepository.create(name, birthday)
 
     @Transactional
     override fun update(
@@ -32,7 +31,5 @@ class AuthorServiceImpl(private val authorRepository: AuthorRepository) :
         return id
     }
 
-    override fun findById(id: Int): Author? {
-        return authorRepository.findById(id)
-    }
+    override fun findById(id: Int): Author? = authorRepository.findById(id)
 }

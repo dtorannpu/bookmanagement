@@ -12,8 +12,8 @@ import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.patch
@@ -29,7 +29,7 @@ class AuthorApiControllerTest {
     @Autowired
     private lateinit var mapper: ObjectMapper
 
-    @MockBean
+    @MockitoBean
     private lateinit var authorService: AuthorService
 
     @Test
@@ -39,13 +39,14 @@ class AuthorApiControllerTest {
         val request = CreateAuthorRequest("test", LocalDate.of(2000, 1, 1))
         val json = mapper.writeValueAsString(request)
 
-        mockMvc.post("/authors") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { json("""{ "id" : 1 }""") }
-        }
+        mockMvc
+            .post("/authors") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { json("""{ "id" : 1 }""") }
+            }
 
         verify(authorService, times(1)).create("test", LocalDate.of(2000, 1, 1))
     }
@@ -57,15 +58,16 @@ class AuthorApiControllerTest {
         val request = UpdateAuthorRequest(1, "test", LocalDate.of(2000, 1, 1))
         val json = mapper.writeValueAsString(request)
 
-        mockMvc.patch("/authors") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content {
-                json("""{ "id" : 1 }""")
+        mockMvc
+            .patch("/authors") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content {
+                    json("""{ "id" : 1 }""")
+                }
             }
-        }
 
         verify(authorService, times(1)).update(1, "test", LocalDate.of(2000, 1, 1))
     }
@@ -77,10 +79,11 @@ class AuthorApiControllerTest {
         val request = UpdateAuthorRequest(1, "test", LocalDate.of(2000, 1, 1))
         val json = mapper.writeValueAsString(request)
 
-        mockMvc.patch("/authors") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect { status { isOk() } }
+        mockMvc
+            .patch("/authors") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect { status { isOk() } }
 
         verify(authorService, times(1)).update(1, "test", LocalDate.of(2000, 1, 1))
     }
@@ -99,7 +102,8 @@ class AuthorApiControllerTest {
             ),
         )
 
-        mockMvc.get("/authors/1")
+        mockMvc
+            .get("/authors/1")
             .andExpect {
                 status { isOk() }
                 content {
@@ -134,7 +138,8 @@ class AuthorApiControllerTest {
     fun getAuthorByIdNoBook() {
         `when`(authorService.findById(any())).thenReturn(Author(1, "夏目　漱石", null, listOf()))
 
-        mockMvc.get("/authors/1")
+        mockMvc
+            .get("/authors/1")
             .andExpect {
                 status { isOk() }
                 content {
@@ -158,7 +163,8 @@ class AuthorApiControllerTest {
     fun getAuthorByIdNotFound() {
         `when`(authorService.findById(any())).thenReturn(null)
 
-        mockMvc.get("/authors/1")
+        mockMvc
+            .get("/authors/1")
             .andExpect { status { isNotFound() } }
 
         verify(authorService, times(1)).findById(1)

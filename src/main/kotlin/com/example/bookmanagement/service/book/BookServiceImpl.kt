@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional
  * 書籍サービス実装
  */
 @Service
-class BookServiceImpl(private val bookRepository: BookRepository, private val authorRepository: AuthorRepository) : BookService {
+class BookServiceImpl(
+    private val bookRepository: BookRepository,
+    private val authorRepository: AuthorRepository,
+) : BookService {
     @Transactional
     override fun create(
         isbn: String?,
@@ -43,7 +46,5 @@ class BookServiceImpl(private val bookRepository: BookRepository, private val au
         title: String?,
         authorName: String?,
         isbn: String?,
-    ): List<Book> {
-        return bookRepository.search(title, authorName, isbn)
-    }
+    ): List<Book> = bookRepository.search(title, authorName, isbn)
 }
