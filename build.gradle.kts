@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.org.springframework.boot.spring.boot.starter.web)
     implementation(libs.com.fasterxml.jackson.module.jackson.module.kotlin)
     implementation(libs.org.flywaydb.flyway.core)
+    implementation(libs.org.flywaydb.flyway.database.postgresql)
     implementation(libs.org.jetbrains.kotlin.kotlin.reflect)
     implementation(libs.org.springframework.boot.spring.boot.starter.validation)
     implementation(libs.org.springdoc.springdoc.openapi.starter.webmvc.ui)
@@ -203,6 +204,7 @@ flyway {
 }
 
 ktlint {
+    version.set(libs.versions.ktlint)
     filter {
         exclude { element ->
             element.file.path.contains("generated")

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController
  * 書籍コントローラー
  */
 @RestController
-class BookApiController(private val bookService: BookService) : BooksApi {
+class BookApiController(
+    private val bookService: BookService,
+) : BooksApi {
     override fun createBook(createBookRequest: CreateBookRequest): ResponseEntity<CreateBookResponse> {
         val id =
             bookService.create(createBookRequest.isbn, createBookRequest.authorId, createBookRequest.title)

@@ -12,8 +12,8 @@ import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.patch
@@ -29,7 +29,7 @@ class BookApiControllerTest {
     @Autowired
     private lateinit var mapper: ObjectMapper
 
-    @MockBean
+    @MockitoBean
     private lateinit var bookService: BookService
 
     @Test
@@ -39,13 +39,14 @@ class BookApiControllerTest {
         val request = CreateBookRequest(2, "こころ", "1234567890")
         val json = mapper.writeValueAsString(request)
 
-        mockMvc.post("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { json("""{ "id" : 1 }""") }
-        }
+        mockMvc
+            .post("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { json("""{ "id" : 1 }""") }
+            }
 
         verify(bookService, times(1)).create("1234567890", 2, "こころ")
     }
@@ -57,13 +58,14 @@ class BookApiControllerTest {
         val request = CreateBookRequest(2, "こころ", "1234567890")
         val json = mapper.writeValueAsString(request)
 
-        mockMvc.post("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { string("") }
-        }
+        mockMvc
+            .post("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { string("") }
+            }
 
         verify(bookService, times(1)).create("1234567890", 2, "こころ")
     }
@@ -75,13 +77,14 @@ class BookApiControllerTest {
         val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
         val json = mapper.writeValueAsString(request)
 
-        mockMvc.patch("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { json("""{ "id" : 1 }""") }
-        }
+        mockMvc
+            .patch("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { json("""{ "id" : 1 }""") }
+            }
 
         verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
     }
@@ -93,13 +96,14 @@ class BookApiControllerTest {
         val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
         val json = mapper.writeValueAsString(request)
 
-        mockMvc.patch("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { string("") }
-        }
+        mockMvc
+            .patch("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { string("") }
+            }
 
         verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
     }
@@ -113,7 +117,8 @@ class BookApiControllerTest {
             ),
         )
 
-        mockMvc.get("/books?bookTitle=こころ&isbn=1234567890&authorName=夏目　漱石")
+        mockMvc
+            .get("/books?bookTitle=こころ&isbn=1234567890&authorName=夏目　漱石")
             .andExpect {
                 status { isOk() }
                 content {

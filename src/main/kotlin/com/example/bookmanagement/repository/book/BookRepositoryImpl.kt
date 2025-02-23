@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository
  * 書籍リポジトリ実装
  */
 @Repository
-class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
+class BookRepositoryImpl(
+    private val create: DSLContext,
+) : BookRepository {
     override fun create(
         isbn: String?,
         authorId: Int,
@@ -32,14 +34,14 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         isbn: String?,
         authorId: Int,
         title: String,
-    ): Int {
-        return create.update(BOOK)
+    ): Int =
+        create
+            .update(BOOK)
             .set(BOOK.ISBN, isbn)
             .set(BOOK.AUTHOR_ID, authorId)
             .set(BOOK.TITLE, title)
             .where(BOOK.ID.eq(id))
             .execute()
-    }
 
     override fun search(
         title: String?,
@@ -47,17 +49,18 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         isbn: String?,
     ): List<Book> {
         val query =
-            create.select(
-                BOOK.ID,
-                BOOK.ISBN,
-                BOOK.TITLE,
-                row(
-                    BOOK.author().ID,
-                    BOOK.author().NAME,
-                    BOOK.author().BIRTHDAY,
-                ).mapping { id, name, birthday -> BookAuthor(authorId = id!!, name = name!!, birthday = birthday) },
-            )
-                .from(BOOK).query
+            create
+                .select(
+                    BOOK.ID,
+                    BOOK.ISBN,
+                    BOOK.TITLE,
+                    row(
+                        BOOK.author().ID,
+                        BOOK.author().NAME,
+                        BOOK.author().BIRTHDAY,
+                    ).mapping { id, name, birthday -> BookAuthor(authorId = id!!, name = name!!, birthday = birthday) },
+                ).from(BOOK)
+                .query
 
         if (title != null) {
             query.addConditions(Operator.AND, BOOK.TITLE.like("%$title%"))
