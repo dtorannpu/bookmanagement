@@ -1,10 +1,12 @@
+import org.flywaydb.gradle.task.AbstractFlywayTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jooq.codegen.gradle.CodegenTask
 
 val jooqVersion: String by project
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-database-postgresql:10.11.0")
+        classpath("org.flywaydb:flyway-database-postgresql:11.3.3")
     }
 }
 
@@ -16,7 +18,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
     id("org.jooq.jooq-codegen-gradle") version "3.19.7"
     id("co.uzzu.dotenv.gradle") version "4.0.0"
-    id("org.flywaydb.flyway") version "10.11.0"
+    id("org.flywaydb.flyway") version "11.3.3"
     id("org.openapi.generator") version "7.4.0"
     id("jacoco")
 }
@@ -182,6 +184,15 @@ jooq {
                 // directory = "src/main/kotlin"
             }
         }
+    }
+}
+
+tasks {
+    withType<AbstractFlywayTask> {
+        notCompatibleWithConfigurationCache("because https://github.com/flyway/flyway/issues/3550")
+    }
+    withType<CodegenTask> {
+        notCompatibleWithConfigurationCache("because https://github.com/jOOQ/jOOQ/issues/16997")
     }
 }
 
