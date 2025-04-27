@@ -1,8 +1,6 @@
 import org.flywaydb.gradle.task.AbstractFlywayTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-val jooqVersion: String by project
-
 buildscript {
     dependencies {
         classpath(libs.org.flywaydb.flyway.database.postgresql)
