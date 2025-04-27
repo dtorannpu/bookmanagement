@@ -23,9 +23,11 @@ plugins {
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
+val javaVersion = System.getenv("JAVA_VERSION") ?: "21"
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(javaVersion)
     }
 }
 
@@ -70,7 +72,7 @@ dependencies {
 kotlin {
     compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = JvmTarget.JVM_21
+        jvmTarget.set(JvmTarget.fromTarget(javaVersion))
     }
 }
 
