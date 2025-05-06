@@ -94,7 +94,7 @@ jooq {
         // Configure the database connection here
         jdbc {
             driver = "org.postgresql.Driver"
-            url = "jdbc:postgresql://localhost:5432/${env.POSTGRES_DB.value}"
+            url = "jdbc:postgresql://localhost:${env.POSTGRES_PORT.value}/${env.POSTGRES_DB.value}"
             user = env.POSTGRES_USER.value
             password = env.POSTGRES_PASSWORD.value
         }
@@ -194,7 +194,7 @@ tasks {
 }
 
 flyway {
-    url = "jdbc:postgresql://localhost:5432/${env.POSTGRES_DB.value}"
+    url = "jdbc:postgresql://localhost:${env.POSTGRES_PORT.value}/${env.POSTGRES_DB.value}"
     user = env.POSTGRES_USER.value
     password = env.POSTGRES_PASSWORD.value
 }
