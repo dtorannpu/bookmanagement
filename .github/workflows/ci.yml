@@ -1,6 +1,6 @@
 name: CI
 
-on: [pull_request, push]
+on: [pull_request]
 
 jobs:
   tests:
@@ -25,7 +25,7 @@ jobs:
         options: >-
           --health-cmd="pg_isready"
           --health-interval=10s
-          --health-timout=5s
+          --health-timeout=5s
           --health-retries=5
     strategy:
       matrix:
