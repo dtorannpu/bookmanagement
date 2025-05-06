@@ -9,7 +9,6 @@ jobs:
     environment:
       name: ci
     env:
-      POSTGRES_HOST: localhost
       POSTGRES_DB: test
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test
