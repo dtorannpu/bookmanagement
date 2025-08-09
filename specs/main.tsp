@@ -308,7 +308,7 @@ model UpdateAuthorResponse {
  */
 @tag("author")
 @route("/authors")
-@patch
+@patch(#{implicitOptionality: false})
 @summary("著者更新")
 op updateAuthor(@body body: UpdateAuthorRequest): UpdateAuthorResponse;
 
@@ -350,7 +350,7 @@ op searchBook(
  */
 @tag("book")
 @route("/books")
-@patch
+@patch(#{implicitOptionality: false})
 @summary("書籍更新")
 op updateBook(@body body: UpdateBookRequest): UpdateBookResponse;
 
