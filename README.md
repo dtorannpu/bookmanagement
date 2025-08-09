@@ -1,5 +1,11 @@
 # 書籍管理APIリポジトリ
 
+## 備考
+@typespec/compilerが必要です  
+https://typespec.io/docs/
+
+npm installを実行してください
+
 ## 実行手順
 
 * DBコンテナ起動
