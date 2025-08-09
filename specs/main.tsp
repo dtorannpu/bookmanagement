@@ -15,12 +15,6 @@ namespace API;
 /**
  * 著者作成リクエスト
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "f56e044dc35c9",
-  }
-)
 @summary("著者作成リクエスト")
 model CreateAuthorRequest {
   /**
@@ -37,12 +31,6 @@ model CreateAuthorRequest {
 /**
  * 著者更新リクエスト
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "a5e173dacc7a0",
-  }
-)
 @summary("著者更新リクエスト")
 model UpdateAuthorRequest {
   /**
@@ -64,12 +52,6 @@ model UpdateAuthorRequest {
 /**
  * 書籍作成リクエスト
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "28493631cd667",
-  }
-)
 @summary("書籍作成リクエスト")
 model CreateBookRequest {
   /**
@@ -91,12 +73,6 @@ model CreateBookRequest {
 /**
  * 書籍更新リクエスト
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "83c501596f526",
-  }
-)
 @summary("書籍更新リクエスト")
 model UpdateBookRequest {
   /**
@@ -123,12 +99,6 @@ model UpdateBookRequest {
 /**
  * 著者
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "g8akxct1grn56",
-  }
-)
 @summary("著者")
 model Author {
   /**
@@ -155,12 +125,6 @@ model Author {
 /**
  * 著者の書籍
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "2g0opobb408k1",
-  }
-)
 @summary("著者の書籍")
 model AuthorBook {
   /**
@@ -182,12 +146,6 @@ model AuthorBook {
 /**
  * 書籍
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "1k3jugezay1ke",
-  }
-)
 @summary("書籍")
 model Book {
   /**
@@ -211,12 +169,6 @@ model Book {
 /**
  * 書籍の著者
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "taweepph9g19d",
-  }
-)
 @summary("書籍の著者")
 model BookAuthor {
   /**
@@ -238,12 +190,6 @@ model BookAuthor {
 /**
  * 書籍登録に成功した場合のレスポンス
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "qi3wrilss487o",
-  }
-)
 @summary("CreateBookResponse")
 model CreateBookResponse {
   /**
@@ -255,12 +201,6 @@ model CreateBookResponse {
 /**
  * 書籍更新に成功した場合のレスポンス
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "2md7c6pz5k1et",
-  }
-)
 @summary("UpdateBookResponse")
 model UpdateBookResponse {
   /**
@@ -272,12 +212,6 @@ model UpdateBookResponse {
 /**
  * 著者登録に成功した場合のレスポンス
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "8cc07plgas186",
-  }
-)
 @summary("CreateAuthorResponse")
 model CreateAuthorResponse {
   /**
@@ -289,12 +223,6 @@ model CreateAuthorResponse {
 /**
  * 著者登録に成功した場合のレスポンス
  */
-@extension(
-  "x-stoplight",
-  #{
-    id: "dq90t3syc4b9x",
-  }
-)
 @summary("UpdateAuthorResponse")
 model UpdateAuthorResponse {
   /**
