@@ -209,9 +209,13 @@ ktlint {
     }
 }
 
+tasks.named("openApiGenerate") {
+    dependsOn("compileTypeSpec")
+}
+
 openApiGenerate {
     generatorName.set("kotlin-spring")
-    inputSpec.set("$rootDir/bookmanagement.yaml")
+    inputSpec.set("$rootDir/tsp-output/schema/openapi.yaml")
     outputDir.set(
         layout.buildDirectory
             .dir("generated-sources/api")
@@ -228,4 +232,43 @@ openApiGenerate {
             "interfaceOnly" to "true",
         ),
     )
+}
+
+tasks.register<Exec>("tspExists") {
+    group = "typespec"
+    description = "Checks if TypeSpec is installed"
+    if (System.getProperty("os.name").lowercase().contains("windows")) {
+        commandLine("cmd.exe", "/d", "/c", "tsp", "--version")
+    } else {
+        commandLine("tsp", "--version")
+    }
+    isIgnoreExitValue = true
+
+    doLast {
+        if (executionResult.get().exitValue == 0) {
+            println("TypeSpec is installed")
+        } else {
+            throw GradleException("TypeSpec is not installed. Run: npm install -g @typespec/compiler @typespec/openapi3")
+        }
+    }
+}
+
+tasks.register<Exec>("compileTypeSpec") {
+    group = "typespec"
+    description = "Compiles TypeSpec to OpenAPI"
+    if (System.getProperty("os.name").lowercase().contains("windows")) {
+        commandLine("cmd.exe", "/d", "/c", "tsp", "compile", "specs/main.tsp", "--emit", "@typespec/openapi3")
+    } else {
+        commandLine("tsp", "compile", "specs/main.tsp", "--emit", "@typespec/openapi3")
+    }
+
+    inputs.files(
+        fileTree("specs") {
+            include("**/*.tsp")
+        },
+    )
+
+    outputs.dir("tsp-output")
+
+    dependsOn("tspExists")
 }
