@@ -257,9 +257,9 @@ tasks.register<Exec>("compileTypeSpec") {
     group = "typespec"
     description = "Compiles TypeSpec to OpenAPI"
     if (System.getProperty("os.name").lowercase().contains("windows")) {
-        commandLine("cmd.exe", "/d", "/c", "tsp", "compile", "specs/main.tsp", "--emit", "@typespec/openapi3")
+        commandLine("cmd.exe", "/d", "/c", "tsp", "compile", "specs/main.tsp")
     } else {
-        commandLine("tsp", "compile", "specs/main.tsp", "--emit", "@typespec/openapi3")
+        commandLine("tsp", "compile", "specs/main.tsp")
     }
 
     inputs.files(
