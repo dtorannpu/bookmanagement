@@ -17,15 +17,15 @@ namespace API;
  */
 @summary("著者作成リクエスト")
 model CreateAuthorRequest {
-  /**
-   * 著者名
-   */
-  @minLength(1) @maxLength(100) name: string;
+    /**
+     * 著者名
+     */
+    @minLength(1) @maxLength(100) name: string;
 
-  /**
-   * 誕生日
-   */
-  birthday?: plainDate;
+    /**
+     * 誕生日
+     */
+    birthday?: plainDate;
 }
 
 /**
@@ -33,20 +33,20 @@ model CreateAuthorRequest {
  */
 @summary("著者更新リクエスト")
 model UpdateAuthorRequest {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 
-  /**
-   * 著者名
-   */
-  @minLength(1) @maxLength(100) name: string;
+    /**
+     * 著者名
+     */
+    @minLength(1) @maxLength(100) name: string;
 
-  /**
-   * 誕生日
-   */
-  birthday?: plainDate;
+    /**
+     * 誕生日
+     */
+    birthday?: plainDate;
 }
 
 /**
@@ -54,20 +54,20 @@ model UpdateAuthorRequest {
  */
 @summary("書籍作成リクエスト")
 model CreateBookRequest {
-  /**
-   * ISBN
-   */
-  @maxLength(17) isbn?: string;
+    /**
+     * ISBN
+     */
+    @maxLength(17) isbn?: string;
 
-  /**
-   * 著者ID
-   */
-  authorId: integer;
+    /**
+     * 著者ID
+     */
+    authorId: integer;
 
-  /**
-   * タイトル
-   */
-  @minLength(1) @maxLength(100) title: string;
+    /**
+     * タイトル
+     */
+    @minLength(1) @maxLength(100) title: string;
 }
 
 /**
@@ -75,25 +75,25 @@ model CreateBookRequest {
  */
 @summary("書籍更新リクエスト")
 model UpdateBookRequest {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 
-  /**
-   * ISBN
-   */
-  @maxLength(17) isbn?: string;
+    /**
+     * ISBN
+     */
+    @maxLength(17) isbn?: string;
 
-  /**
-   * 著者ID
-   */
-  authorId: integer;
+    /**
+     * 著者ID
+     */
+    authorId: integer;
 
-  /**
-   * タイトル
-   */
-  @minLength(1) @maxLength(100) title: string;
+    /**
+     * タイトル
+     */
+    @minLength(1) @maxLength(100) title: string;
 }
 
 /**
@@ -101,25 +101,25 @@ model UpdateBookRequest {
  */
 @summary("著者")
 model Author {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 
-  /**
-   * 著者名
-   */
-  name: string;
+    /**
+     * 著者名
+     */
+    name: string;
 
-  /**
-   * 誕生日
-   */
-  birthday?: plainDate;
+    /**
+     * 誕生日
+     */
+    birthday?: plainDate;
 
-  /**
-   * 著者の書籍
-   */
-  books: AuthorBook[];
+    /**
+     * 著者の書籍
+     */
+    books: AuthorBook[];
 }
 
 /**
@@ -127,20 +127,20 @@ model Author {
  */
 @summary("著者の書籍")
 model AuthorBook {
-  /**
-   * ID
-   */
-  id: integer = 1;
+    /**
+     * ID
+     */
+    id: integer = 1;
 
-  /**
-   * ISBN
-   */
-  isbn?: string;
+    /**
+     * ISBN
+     */
+    isbn?: string;
 
-  /**
-   * タイトル
-   */
-  title: string;
+    /**
+     * タイトル
+     */
+    title: string;
 }
 
 /**
@@ -148,22 +148,22 @@ model AuthorBook {
  */
 @summary("書籍")
 model Book {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 
-  /**
-   * ISBN
-   */
-  isbn?: string;
+    /**
+     * ISBN
+     */
+    isbn?: string;
 
-  /**
-   * タイトル
-   */
-  title: string;
+    /**
+     * タイトル
+     */
+    title: string;
 
-  author: BookAuthor;
+    author: BookAuthor;
 }
 
 /**
@@ -171,20 +171,20 @@ model Book {
  */
 @summary("書籍の著者")
 model BookAuthor {
-  /**
-   * ID
-   */
-  authorId: integer;
+    /**
+     * ID
+     */
+    authorId: integer;
 
-  /**
-   * 著者名
-   */
-  name: string;
+    /**
+     * 著者名
+     */
+    name: string;
 
-  /**
-   * 誕生日
-   */
-  birthday?: plainDate;
+    /**
+     * 誕生日
+     */
+    birthday?: plainDate;
 }
 
 /**
@@ -192,10 +192,10 @@ model BookAuthor {
  */
 @summary("CreateBookResponse")
 model CreateBookResponse {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 }
 
 /**
@@ -203,10 +203,10 @@ model CreateBookResponse {
  */
 @summary("UpdateBookResponse")
 model UpdateBookResponse {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 }
 
 /**
@@ -214,10 +214,10 @@ model UpdateBookResponse {
  */
 @summary("CreateAuthorResponse")
 model CreateAuthorResponse {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 }
 
 /**
@@ -225,10 +225,10 @@ model CreateAuthorResponse {
  */
 @summary("UpdateAuthorResponse")
 model UpdateAuthorResponse {
-  /**
-   * ID
-   */
-  id: integer;
+    /**
+     * ID
+     */
+    id: integer;
 }
 
 /**
@@ -236,7 +236,7 @@ model UpdateAuthorResponse {
  */
 @tag("author")
 @route("/authors")
-@patch(#{implicitOptionality: false})
+@patch(#{ implicitOptionality: false })
 @summary("著者更新")
 op updateAuthor(@body body: UpdateAuthorRequest): UpdateAuthorResponse;
 
@@ -257,20 +257,20 @@ op createAuthor(@body body: CreateAuthorRequest): CreateAuthorResponse;
 @get
 @summary("書籍の検索")
 op searchBook(
-  /**
-   * 書籍タイトル ※部分一致検索
-   */
-  @query(#{ explode: true }) bookTitle?: string,
+    /**
+     * 書籍タイトル ※部分一致検索
+     */
+    @query(#{ explode: true }) bookTitle?: string,
 
-  /**
-   * 著者名 ※部分一致検索
-   */
-  @query(#{ explode: true }) authorName?: string,
+    /**
+     * 著者名 ※部分一致検索
+     */
+    @query(#{ explode: true }) authorName?: string,
 
-  /**
-   * ISBN ※完全一致検索
-   */
-  @query(#{ explode: true }) isbn?: string,
+    /**
+     * ISBN ※完全一致検索
+     */
+    @query(#{ explode: true }) isbn?: string,
 ): Body<Book[]>;
 
 /**
@@ -278,7 +278,7 @@ op searchBook(
  */
 @tag("book")
 @route("/books")
-@patch(#{implicitOptionality: false})
+@patch(#{ implicitOptionality: false })
 @summary("書籍更新")
 op updateBook(@body body: UpdateBookRequest): UpdateBookResponse;
 
@@ -299,8 +299,8 @@ op createBook(@body body: CreateBookRequest): CreateBookResponse;
 @get
 @summary("著者に紐づく本を取得できる機能")
 op getAuthorById(
-  /**
-   * ID
-   */
-  @path id: integer,
+    /**
+     * ID
+     */
+    @path id: integer,
 ): Author | NotFoundResponse;
