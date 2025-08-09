@@ -44,6 +44,9 @@ jobs:
       - name: Install TypeSpec compiler
         run: npm install -g @typespec/compiler
 
+      - name: Install Npm packages
+        run: npm install
+
       - name: Java version
         env:
           JAVA_VERSION: ${{ matrix.java-version }}
