@@ -37,6 +37,7 @@ jobs:
         with:
           node-version: "24"
           cache: "npm"
+          cache-dependency-path: "./package-lock.json"
 
       - name: Install TypeSpec compiler
         run: npm install -g @typespec/compiler
