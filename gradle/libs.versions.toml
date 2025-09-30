@@ -19,7 +19,7 @@ org-jooq-jooq-meta = { group = "org.jooq", name = "jooq-meta", version.ref = "jo
 org-jooq-jooq-codegen = { group = "org.jooq", name = "jooq-codegen", version.ref = "jooq" }
 co-uzzu-dotenv-gradle = { group = "co.uzzu.dotenv", name = "gradle", version.ref = "co-uzzu-dotenv-gradle" }
 com-fasterxml-jackson-module-jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
-org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core" }
+org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "flyway" }
 org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
 org-jetbrains-kotlin-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
 org-mockito-kotlin-mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "org-mockito-kotlin-mockito-kotlin" }
