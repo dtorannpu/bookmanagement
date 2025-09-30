@@ -5,7 +5,7 @@ org-jetbrains-kotlin-jvm = "2.2.20"
 org-jetbrains-kotlin-plugin-spring = "2.2.20"
 org-jlleitschuh-gradle-ktlint = "13.1.0"
 co-uzzu-dotenv-gradle = "4.0.0"
-flyway = "11.13.0"
+flyway = "11.13.2"
 org-openapi-generator = "7.16.0"
 jooq = "3.20.7"
 org-springdoc-springdoc-openapi-starter-webmvc-ui = "2.8.13"
@@ -19,7 +19,7 @@ org-jooq-jooq-meta = { group = "org.jooq", name = "jooq-meta", version.ref = "jo
 org-jooq-jooq-codegen = { group = "org.jooq", name = "jooq-codegen", version.ref = "jooq" }
 co-uzzu-dotenv-gradle = { group = "co.uzzu.dotenv", name = "gradle", version.ref = "co-uzzu-dotenv-gradle" }
 com-fasterxml-jackson-module-jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
-org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core" }
+org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "flyway" }
 org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
 org-jetbrains-kotlin-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
 org-mockito-kotlin-mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "org-mockito-kotlin-mockito-kotlin" }
