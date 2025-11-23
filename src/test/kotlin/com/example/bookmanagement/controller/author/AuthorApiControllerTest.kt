@@ -5,19 +5,19 @@ import com.example.bookmanagement.api.model.UpdateAuthorRequest
 import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.model.AuthorBook
 import com.example.bookmanagement.service.author.AuthorService
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
+import tools.jackson.databind.json.JsonMapper
 import java.time.LocalDate
 import kotlin.test.Test
 
@@ -27,7 +27,7 @@ class AuthorApiControllerTest {
     private lateinit var mockMvc: MockMvc
 
     @Autowired
-    private lateinit var mapper: ObjectMapper
+    private lateinit var mapper: JsonMapper
 
     @MockitoBean
     private lateinit var authorService: AuthorService

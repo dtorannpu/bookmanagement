@@ -1,5 +1,5 @@
 [versions]
-org-springframework-boot = "3.5.7"
+org-springframework-boot = "4.0.0"
 io-spring-dependency-management = "1.1.7"
 org-jetbrains-kotlin-jvm = "2.2.21"
 org-jetbrains-kotlin-plugin-spring = "2.2.21"
@@ -27,13 +27,17 @@ org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql", ver
 org-springdoc-springdoc-openapi-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "org-springdoc-springdoc-openapi-starter-webmvc-ui" }
 org-springframework-boot-spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose" }
 org-springframework-boot-spring-boot-starter-jooq = { group = "org.springframework.boot", name = "spring-boot-starter-jooq" }
+org-springframework-boot-spring-boot-starter-jooq-test = { group = "org.springframework.boot", name = "spring-boot-starter-jooq-test" }
 org-springframework-boot-spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
 org-springframework-boot-spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
-org-springframework-boot-spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+org-springframework-boot-spring-boot-starter-webmvc = { group = "org.springframework.boot", name = "spring-boot-starter-webmvc" }
+org-springframework-boot-spring-boot-starter-webmvc-test = { group = "org.springframework.boot", name = "spring-boot-starter-webmvc-test" }
 org-springframework-boot-spring-boot-testcontainers = { group = "org.springframework.boot", name = "spring-boot-testcontainers" }
-org-testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
-org-testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql" }
+org-testcontainers-testcontainers-junit-jupiter = { group = "org.testcontainers", name = "testcontainers-junit-jupiter" }
+org-testcontainers-testcontainers-postgresql = { group = "org.testcontainers", name = "testcontainers-postgresql" }
 org-flywaydb-flyway-database-postgresql = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
+org-springframework-boot-spring-boot-starter-flyway = { group = "org.springframework.boot", name = "spring-boot-starter-flyway" }
+org-springframework-boot-spring-boot-starter-flyway-test = { group = "org.springframework.boot", name = "spring-boot-starter-flyway-test" }
 
 [plugins]
 org-springframework-boot = { id = "org.springframework.boot", version.ref = "org-springframework-boot" }
