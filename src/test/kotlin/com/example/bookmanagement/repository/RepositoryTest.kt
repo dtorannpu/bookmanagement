@@ -2,7 +2,7 @@ package com.example.bookmanagement.repository
 
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
-import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.postgresql.PostgreSQLContainer
 
 abstract class RepositoryTest {
     companion object {
