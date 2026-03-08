@@ -262,7 +262,7 @@ tasks.register<Exec>("compileTypeSpec") {
     if (System.getProperty("os.name").lowercase().contains("windows")) {
         commandLine("cmd.exe", "/d", "/c", "tsp", "compile", "specs/main.tsp")
     } else {
-        commandLine("tsp", "compile", "specs/main.tsp")
+        commandLine("pnpm", "tsp", "compile", "specs/main.tsp")
     }
 
     inputs.files(
