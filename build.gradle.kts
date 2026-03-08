@@ -243,7 +243,7 @@ tasks.register<Exec>("tspExists") {
     if (System.getProperty("os.name").lowercase().contains("windows")) {
         commandLine("cmd.exe", "/d", "/c", "tsp", "--version")
     } else {
-        commandLine("tsp", "--version")
+        commandLine("pnpm", "exec", "tsp", "--version")
     }
     isIgnoreExitValue = true
 
