@@ -47,7 +47,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install pnpm packages
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Java version
         env:
