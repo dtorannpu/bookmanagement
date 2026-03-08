@@ -46,9 +46,6 @@ jobs:
           node-version: "25"
           cache: "pnpm"
 
-      #   - name: Install TypeSpec compiler
-      #     run: pnpm install -g @typespec/compiler
-
       - name: Install pnpm packages
         run: pnpm install
 
