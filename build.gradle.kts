@@ -243,7 +243,7 @@ tasks.register<Exec>("tspExists") {
     if (System.getProperty("os.name").lowercase().contains("windows")) {
         commandLine("cmd.exe", "/d", "/c", "tsp", "--version")
     } else {
-        commandLine("pnpm", "exec", "tsp", "--version")
+        commandLine("bash", "-c", "pnpm exec tsp --version")
     }
     isIgnoreExitValue = true
 
@@ -262,7 +262,7 @@ tasks.register<Exec>("compileTypeSpec") {
     if (System.getProperty("os.name").lowercase().contains("windows")) {
         commandLine("cmd.exe", "/d", "/c", "tsp", "compile", "specs/main.tsp")
     } else {
-        commandLine("pnpm", "exec", "tsp", "compile", "specs/main.tsp")
+        commandLine("bash", "-c", "pnpm exec tsp compile specs/main.tsp")
     }
 
     inputs.files(
